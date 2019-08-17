@@ -3,7 +3,7 @@
 ## Prerequisite
 
 ```sh
-pip3 install scrapy
+pip3 install scrapy packaging
 ```
 
 ## Setting
