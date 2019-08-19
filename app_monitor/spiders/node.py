@@ -6,7 +6,7 @@ from app_monitor.items import AppMonitorItem
 class NodeSpider(scrapy.Spider):
     name = 'node'
     allowed_domains = ['nodejs.org']
-    start_urls = ['http://nodejs.org/en/download/releases/']
+    start_urls = ['https://nodejs.org/en/download/releases/']
 
     def parse(self, response):
         url = response.xpath('//div[@id="main"]//section//a[text()[re:test(., "^Node.js\s10.x$")]]/@href').extract_first()
