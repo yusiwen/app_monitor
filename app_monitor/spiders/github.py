@@ -8,7 +8,7 @@ class GithubSpider(scrapy.Spider):
     name = 'github'
     allowed_domains = ['api.github.com']
     start_urls = [
-        'http://api.github.com/repos/go-gitea/gitea/releases',
+        'https://api.github.com/repos/go-gitea/gitea/releases',
         'https://api.github.com/repos/git-for-windows/git/releases',
         'https://api.github.com/repos/keeweb/keeweb/releases',
         'https://api.github.com/repos/zeit/hyper/releases'
