@@ -23,4 +23,5 @@ class NppSpider(scrapy.Spider):
         notes = response.xpath('//div[@id="main"]/div/ol/li/text()').extract()
         item['notes'] = notes
         item['id'] = 'npp'
+        item['download_url'] = 'https://notepad-plus-plus.org' + response.xpath('//div[@id="main"]//a[text()[re:test(., "^Notepad.*zip.*x64$")]]/@href').get()
         return item
