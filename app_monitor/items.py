@@ -13,4 +13,5 @@ class AppMonitorItem(scrapy.Item):
     version = scrapy.Field()
     date = scrapy.Field()
     notes = scrapy.Field()
+    download_url = scrapy.Field()
 
