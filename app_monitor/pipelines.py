@@ -6,12 +6,35 @@ import configparser
 import app_monitor.settings
 
 from packaging import version
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 class AppMonitorPipeline(object):
+    def _gen_mail(self, item):
+        # Create the container (outer) email message.
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = item['name'] + ' Update Found'
+        text = "{name}\n{version}\n{date}\n{notes}\n{download_url}".format(**item)
+        html = """\
+            <html>
+              <head></head>
+              <body>
+                <p>{name}</p>
+                <p>{version}</p>
+                <p>{date}</p>
+                <p>{notes}</p>
+                <p><a href='{download_url}'>{download_url}</a></p>
+              </body>
+            </html>
+        """.format(**item)
+        msg.attach(MIMEText(text, 'plain'))
+        msg.attach(MIMEText(html, 'html'))
+        return msg
+
     def _send_mail(self, item):
         logging.info('Send mail.....')
         config = configparser.ConfigParser()
@@ -23,7 +46,10 @@ class AppMonitorPipeline(object):
         password = config['mail']['smtp_password']
         sender_email = config['mail']['sender']
         receiver_email = config['mail']['receiver']
-        message = "Subject: {name} Update Found\n\nNew version: {version}".format(**item)
+#        message = "Subject: {name} Update Found\n\nNew version: {version}".format(**item)
+        message = self._gen_mail(item)
+        message['From'] = sender_email
+        message['To'] = receiver_email
 
         context = ssl.create_default_context()
         with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -31,7 +57,9 @@ class AppMonitorPipeline(object):
             server.starttls(context=context)
             server.ehlo()  # Can be omitted
             server.login(username, password)
-            server.sendmail(sender_email, receiver_email, message)
+            logging.debug('Mail server logged in')
+            server.sendmail(sender_email, receiver_email, message.as_string())
+            server.quit()
         logging.info('Mail sent')
 
     def _write_data(self, filename, item):
