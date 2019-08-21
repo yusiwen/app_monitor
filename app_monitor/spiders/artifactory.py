@@ -5,7 +5,7 @@ from app_monitor.items import AppMonitorItem
 
 class ArtifactorySpider(scrapy.Spider):
     name = 'artifactory'
-    allowed_domains = ['bintray.com/jfrog/artifactory-debs/jfrog-artifactory-oss-deb']
+    allowed_domains = ['bintray.com/jfrog']
     start_urls = ['https://bintray.com/jfrog/artifactory-debs/jfrog-artifactory-oss-deb/_latestVersion']
 
     def parse(self, response):
@@ -19,4 +19,5 @@ class ArtifactorySpider(scrapy.Spider):
         item['date'] = date
         item['notes'] = ''
         item['id'] = 'artifactory'
+        item['download_url'] = 'https://bintray.com' + response.xpath('//div[@id="node-831404060"]/div/a/@href').get()
         return item
