@@ -33,7 +33,15 @@ class NodeSpider(scrapy.Spider):
 
         item['date'] = date
 
-        item['notes'] = ''
+        if 'latest-v10' in response.url:
+            item['notes'] = '<a href="https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V10.md#' + version + '">Changelog</a>'
+        else:
+            item['notes'] = '<a href="https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V8.md#' + version + '">Changelog</a>'
+
         item['id'] = 'node-' + tmp
-        item['download_url'] = ''
+
+        if 'latest-v10' in response.url:
+            item['download_url'] = 'https://nodejs.org/dist/latest-v10.x/' + response.xpath('//a[text()[re:test(.,"^node.*x64\.msi$")]]/@href').get()
+        else:
+            item['download_url'] = 'https://nodejs.org/dist/latest-v8.x/' + response.xpath('//a[text()[re:test(.,"^node.*x64\.msi$")]]/@href').get()
         return item
