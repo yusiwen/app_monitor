@@ -11,7 +11,8 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/go-gitea/gitea/releases',
         'https://api.github.com/repos/git-for-windows/git/releases',
         'https://api.github.com/repos/keeweb/keeweb/releases',
-        'https://api.github.com/repos/zeit/hyper/releases'
+        'https://api.github.com/repos/zeit/hyper/releases',
+        'https://api.github.com/repos/gitextensions/gitextensions/releases',
     ]
 
     def parse(self, response):
@@ -27,4 +28,5 @@ class GithubSpider(scrapy.Spider):
         item['date'] = date
         item['notes'] = ''
         item['id'] = name
+        item['download_url'] = ''
         return item
