@@ -27,6 +27,6 @@ class ChromeSpider(scrapy.Spider):
         item['date'] = date
         item['notes'] = ''
         item['id'] = 'chrome'
-        item['download_url'] = ''
+        item['download_url'] = 'https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1'
         return item
 
