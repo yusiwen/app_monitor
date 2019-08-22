@@ -27,5 +27,5 @@ class CalibreSpider(scrapy.Spider):
         notes = notes.join(response.xpath('(//div[@id="content"]//h2)[1]/following-sibling::ul').extract())
         item['notes'] = notes
         item['id'] = 'calibre'
-        item['download_url'] = ''
+        item['download_url'] = 'https://calibre-ebook.com/dist/portable'
         return item
