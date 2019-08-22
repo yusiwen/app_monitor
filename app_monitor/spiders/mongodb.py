@@ -20,5 +20,5 @@ class MongodbSpider(scrapy.Spider):
 
         item['notes'] = ''
         item['id'] = 'mongodb'
-        item['download_url'] = ''
+        item['download_url'] = 'https://www.mongodb.org/dl/win32/'
         return item
