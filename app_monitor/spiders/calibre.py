@@ -25,4 +25,5 @@ class CalibreSpider(scrapy.Spider):
 
         item['notes'] = ''
         item['id'] = 'calibre'
+        item['download_url'] = ''
         return item

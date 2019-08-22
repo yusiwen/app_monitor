@@ -35,4 +35,5 @@ class NodeSpider(scrapy.Spider):
 
         item['notes'] = ''
         item['id'] = 'node-' + tmp
+        item['download_url'] = ''
         return item
