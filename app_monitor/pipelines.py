@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-import smtplib, ssl
-import os, errno
+import smtplib
+import ssl
+import os
+import errno
 import logging
 import configparser
 import app_monitor.settings
@@ -13,24 +15,34 @@ from email.mime.text import MIMEText
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+
+
 class AppMonitorPipeline(object):
     def _gen_mail(self, item):
         # Create the container (outer) email message.
         msg = MIMEMultipart('alternative')
         msg['Subject'] = item['name'] + ' Update Found'
-        text = "{name}\n{version}\n{date}\n{notes}\n{download_url}".format(**item)
-        html = """\
-            <html>
-              <head></head>
-              <body>
+        text = "{name}\n{version}\n{date}\n{notes}\n{download_url}".format(
+            **item)
+        html = """<html><head></head><body>\
                 <p>{name}</p>
                 <p>{version}</p>
                 <p>{date}</p>
-                <p>{notes}</p>
-                <p><a href='{download_url}'>{download_url}</a></p>
-              </body>
-            </html>
-        """.format(**item)
+                <p>{notes}</p>""".format(**item)
+        urls = item['download_url']
+        dwn_str = ''
+        if isinstance(urls, str):
+            dwn_str = "<p><a href='{}'>{}</a></p>".format(
+                urls, urls)
+        elif isinstance(urls, list):
+            for x in urls:
+                dwn_str += "<p><a href='{}'>{}</a></p>".format(
+                    x, x)
+        else:
+            dwn_str = ''
+
+        html += dwn_str + '</body></html>'
+
         msg.attach(MIMEText(text, 'plain'))
         msg.attach(MIMEText(html, 'html'))
         return msg
@@ -66,7 +78,7 @@ class AppMonitorPipeline(object):
         if not os.path.exists(os.path.dirname(filename)):
             try:
                 os.makedirs(os.path.dirname(filename))
-            except OSError as exc: # Guard against race condition
+            except OSError as exc:  # Guard against race condition
                 if exc.errno != errno.EEXIST:
                     logging.error('Error: ' + os.strerror(exc.errno))
                     raise
