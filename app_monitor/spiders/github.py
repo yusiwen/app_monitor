@@ -14,6 +14,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/keeweb/keeweb/releases',
         'https://api.github.com/repos/zeit/hyper/releases',
         'https://api.github.com/repos/gitextensions/gitextensions/releases',
+        'https://api.github.com/repos/cmderdev/cmder/releases',
     ]
 
     def _parse_assets(self, id, version, data):
