@@ -19,5 +19,5 @@ class ArtifactorySpider(scrapy.Spider):
         item['date'] = date
         item['notes'] = ''
         item['id'] = 'artifactory'
-        item['download_url'] = 'https://bintray.com' + response.xpath('//div[@id="node-831404060"]/div/a/@href').get()
+        item['download_url'] = 'https://bintray.com' + response.xpath('//div[@id="main-content"]//div[@class="nodeDetails"]/a/@href').get()
         return item
