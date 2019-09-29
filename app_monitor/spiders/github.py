@@ -31,8 +31,13 @@ class GithubSpider(scrapy.Spider):
         elif id == 'git':
             output = [x for x in filtered if x['name'] == 'Git-' + version + '-64-bit.exe']
 
-        if len(output) >= 1:
+        if len(output) == 1:
             return output[0]['browser_download_url']
+        elif len(output) > 1:
+            urls = []
+            for o in output:
+                urls.append(o['browser_download_url'])
+            return urls
         else:
             return ''
 
