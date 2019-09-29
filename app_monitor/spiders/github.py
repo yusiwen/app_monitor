@@ -24,7 +24,10 @@ class GithubSpider(scrapy.Spider):
         if id == 'gitea':
             output = [x for x in filtered if x['name'] == 'gitea-' + version[1:] + '-linux-amd64']
         elif id == 'keeweb':
-            output = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.win.x64.zip']
+            o1 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.win.x64.zip']
+            o2 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.linux.x64.deb']
+            o3 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.mac.dmg']
+            output = o1 + o2 + o3
         elif id == 'git':
             output = [x for x in filtered if x['name'] == 'Git-' + version + '-64-bit.exe']
 
