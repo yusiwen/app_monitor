@@ -16,6 +16,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/gitextensions/gitextensions/releases',
         'https://api.github.com/repos/cmderdev/cmder/releases',
         'https://api.github.com/repos/shadowsocks/ShadowsocksX-NG/releases',
+        'https://api.github.com/repos/be5invis/Sarasa-Gothic/releases',
     ]
 
     def _parse_assets(self, id, version, data):
