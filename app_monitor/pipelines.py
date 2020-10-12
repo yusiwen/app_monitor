@@ -49,27 +49,21 @@ class AppMonitorPipeline(object):
 
     def _send_mail(self, item):
         logging.info('Send mail.....')
-        config = configparser.ConfigParser()
-        config.read(os.path.expanduser(app_monitor.settings.MAIL_CONFIG_FILE))
 
-        smtp_server = config['mail']['smtp_server']
-        smtp_port = config['mail']['smtp_port']
-        username = config['mail']['smtp_username']
-        password = config['mail']['smtp_password']
-        sender_email = config['mail']['sender']
-        receiver_email = config['mail']['receiver']
         message = self._gen_mail(item)
-        message['From'] = sender_email
-        message['To'] = receiver_email
+        message['From'] = app_monitor.settings.SMTP_SENDER
+        message['To'] = app_monitor.settings.SMTP_RECEIVER
 
         context = ssl.create_default_context()
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
+        with smtplib.SMTP(app_monitor.settings.SMTP_SERVER, app_monitor.settings.SMTP_PORT) as server:
             server.ehlo()  # Can be omitted
             server.starttls(context=context)
             server.ehlo()  # Can be omitted
-            server.login(username, password)
+            server.login(app_monitor.settings.SMTP_USERNAME,
+                         app_monitor.settings.SMTP_PASSWORD)
             logging.debug('Mail server logged in')
-            server.sendmail(sender_email, receiver_email, message.as_string())
+            server.sendmail(app_monitor.settings.SMTP_SENDER,
+                            app_monitor.settings.SMTP_RECEIVER, message.as_string())
             server.quit()
         logging.info('Mail sent')
 
@@ -94,7 +88,8 @@ class AppMonitorPipeline(object):
                 else:
                     logging.info('No Update found, skipping...')
         else:
-            self._send_mail(item)
+            if app_monitor.settings.SEND_MAIL:
+                self._send_mail(item)
         self._write_data(filename, item)
 
     def process_item(self, item, spider):

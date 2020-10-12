@@ -5,7 +5,11 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import logging
+import app_monitor.settings
+
 from scrapy import signals
+from w3lib.http import basic_auth_header
 
 
 class AppMonitorSpiderMiddleware(object):
@@ -78,6 +82,13 @@ class AppMonitorDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+        if app_monitor.settings.USE_PROXY:
+            logging.info('PROXY ENABLED')
+            request.meta['proxy'] = "http://192.168.2.54:7890"
+            if (not app_monitor.settings.PROXY_USERNAME) and (not app_monitor.settings.PROXY_PASSWORD):
+                request.headers['Proxy-Authorization'] = basic_auth_header(
+                    app_monitor.settings.PROXY_USERNAME, app_monitor.settings.PROXY_PASSWORD)
+
         return None
 
     def process_response(self, request, response, spider):

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
+import configparser
+
 # Scrapy settings for app_monitor project
 #
 # For simplicity, this file contains only settings considered important or
@@ -39,28 +42,28 @@ ROBOTSTXT_OBEY = False
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
+# DEFAULT_REQUEST_HEADERS = {
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
-#}
+# }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+# SPIDER_MIDDLEWARES = {
 #    'app_monitor.middlewares.AppMonitorSpiderMiddleware': 543,
-#}
+# }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'app_monitor.middlewares.AppMonitorDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'app_monitor.middlewares.AppMonitorDownloaderMiddleware': 300,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
@@ -89,4 +92,36 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MAIL_CONFIG_FILE = '~/.mail.cfg'
+APP_MONITOR_CONFIG_FILE = '~/.app_monitor.cfg'
+
+SEND_MAIL = False
+USE_PROXY = False
+SMTP_SERVER = ''
+SMTP_PORT = ''
+SMTP_USERNAME = ''
+SMTP_PASSWORD = ''
+SMTP_SENDER = ''
+SMTP_RECEIVER = ''
+PROXY_HOST = ''
+PROXY_USERNAME = ''
+PROXY_PASSWORD = ''
+
+if not os.path.isfile(os.path.expanduser(APP_MONITOR_CONFIG_FILE)):
+    SEND_MAIL = False
+    USE_PROXY = False
+else:
+    config = configparser.ConfigParser()
+    config.read(os.path.expanduser(APP_MONITOR_CONFIG_FILE))
+
+    SEND_MAIL = config['mail']['enable']
+    SMTP_SERVER = config['mail']['smtp_server']
+    SMTP_PORT = config['mail']['smtp_port']
+    SMTP_USERNAME = config['mail']['smtp_username']
+    SMTP_PASSWORD = config['mail']['smtp_password']
+    SMTP_SENDER = config['mail']['sender']
+    SMTP_RECEIVER = config['mail']['receiver']
+
+    USE_PROXY = config['proxy']['enable']
+    PROXY_HOST = config['proxy']['url']
+    PROXY_USERNAME = config['proxy']['username']
+    PROXY_PASSWORD = config['proxy']['password']
