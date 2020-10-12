@@ -22,6 +22,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/Eugeny/terminus/releases/latest',
         'https://api.github.com/repos/dbeaver/dbeaver/releases/latest',
         'https://api.github.com/repos/microsoft/vscode/releases/latest',
+        'https://api.github.com/repos/cdr/code-server/releases/latest',
         'https://api.github.com/repos/laurent22/joplin/releases/latest'
     ]
 
