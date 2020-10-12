@@ -37,6 +37,9 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/prometheus/prometheus/releases/latest',
         'https://api.github.com/repos/prometheus/node_exporter/releases/latest',
         'https://api.github.com/repos/prometheus/pushgateway/releases/latest',
+        'https://api.github.com/repos/redis/redis/releases/latest',
+        'https://api.github.com/repos/grafana/grafana/releases/latest',
+        'https://api.github.com/repos/jenkinsci/jenkins/releases/latest',
         'https://api.github.com/repos/laurent22/joplin/releases/latest'
     ]
 
