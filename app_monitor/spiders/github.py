@@ -19,17 +19,17 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/be5invis/Sarasa-Gothic/releases',
     ]
 
-    def _parse_assets(self, id, version, data):
+    def _parse_assets(self, app_id, version, **data):
         filtered = data['assets']
         output = []
-        if id == 'gitea':
+        if app_id == 'gitea':
             output = [x for x in filtered if x['name'] == 'gitea-' + version[1:] + '-linux-amd64']
-        elif id == 'keeweb':
+        elif app_id == 'keeweb':
             o1 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.win.x64.zip']
             o2 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.linux.x64.deb']
             o3 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.mac.dmg']
             output = o1 + o2 + o3
-        elif id == 'git':
+        elif app_id == 'git':
             output = [x for x in filtered if x['name'] == 'Git-' + version + '-64-bit.exe']
 
         if len(output) == 1:
@@ -44,9 +44,9 @@ class GithubSpider(scrapy.Spider):
 
 
     def parse(self, response):
-        id = response.url.rsplit('/', 2)[-2]
-        json_dict = json.loads(response.body_as_unicode())
-        if id == 'git':
+        app_id = response.url.rsplit('/', 2)[-2]
+        json_dict = json.loads(response.text())
+        if app_id == 'git':
             p = re.compile('^Git\sfor\sWindows.*')
             tmp = [x for x in json_dict if p.match(x['name'])]
             filtered_dict = tmp[0]
@@ -58,11 +58,11 @@ class GithubSpider(scrapy.Spider):
         date = filtered_dict['created_at']
 
         item = AppMonitorItem()
-        item['name'] = id
+        item['name'] = app_id
         item['version'] = version
         item['date'] = date
         item['notes'] = ''
-        item['id'] = id
-        item['download_url'] = self._parse_assets(id, version, filtered_dict)
+        item['app_id'] = app_id
+        item['download_url'] = self._parse_assets(app_id, version, filtered_dict)
         return item
 
