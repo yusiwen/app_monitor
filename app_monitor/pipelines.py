@@ -58,7 +58,6 @@ class AppMonitorPipeline(object):
         password = config['mail']['smtp_password']
         sender_email = config['mail']['sender']
         receiver_email = config['mail']['receiver']
-#        message = "Subject: {name} Update Found\n\nNew version: {version}".format(**item)
         message = self._gen_mail(item)
         message['From'] = sender_email
         message['To'] = receiver_email
