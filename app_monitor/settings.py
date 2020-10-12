@@ -113,7 +113,7 @@ else:
     config = configparser.ConfigParser()
     config.read(os.path.expanduser(APP_MONITOR_CONFIG_FILE))
 
-    SEND_MAIL = config['mail']['enable']
+    SEND_MAIL = config.getboolean('mail', 'enable')
     SMTP_SERVER = config['mail']['smtp_server']
     SMTP_PORT = config['mail']['smtp_port']
     SMTP_USERNAME = config['mail']['smtp_username']
@@ -121,7 +121,7 @@ else:
     SMTP_SENDER = config['mail']['sender']
     SMTP_RECEIVER = config['mail']['receiver']
 
-    USE_PROXY = config['proxy']['enable']
+    USE_PROXY = config.getboolean('proxy', 'enable')
     PROXY_HOST = config['proxy']['url']
     PROXY_USERNAME = config['proxy']['username']
     PROXY_PASSWORD = config['proxy']['password']
