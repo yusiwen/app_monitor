@@ -23,6 +23,20 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/dbeaver/dbeaver/releases/latest',
         'https://api.github.com/repos/microsoft/vscode/releases/latest',
         'https://api.github.com/repos/cdr/code-server/releases/latest',
+        'https://api.github.com/repos/minio/minio/releases/latest',
+        'https://api.github.com/repos/Requarks/wiki/releases/latest',
+        'https://api.github.com/repos/janeczku/calibre-web/releases/latest',
+        'https://api.github.com/repos/goharbor/harbor/releases/latest',
+        'https://api.github.com/repos/elastic/elasticsearch/releases/latest',
+        'https://api.github.com/repos/elastic/logstash/releases/latest',
+        'https://api.github.com/repos/elastic/kibana/releases/latest',
+        'https://api.github.com/repos/kubernetes/kubernetes/releases/latest',
+        'https://api.github.com/repos/kubernetes/minikube/releases/latest',
+        'https://api.github.com/repos/kubernetes-sigs/kind/releases/latest',
+        'https://api.github.com/repos/kubeedge/kubeedge/releases/latest',
+        'https://api.github.com/repos/prometheus/prometheus/releases/latest',
+        'https://api.github.com/repos/prometheus/node_exporter/releases/latest',
+        'https://api.github.com/repos/prometheus/pushgateway/releases/latest',
         'https://api.github.com/repos/laurent22/joplin/releases/latest'
     ]
 
