@@ -5,13 +5,16 @@ from app_monitor.items import AppMonitorItem
 class WpsSpider(scrapy.Spider):
     name = 'wps'
     allowed_domains = ['wps.cn']
-    start_urls = ['http://pc.wps.cn/', 'https://mac.wps.cn/', 'https://linux.wps.cn/']
+    start_urls = ['http://pc.wps.cn/',
+                  'https://mac.wps.cn/', 'https://linux.wps.cn/']
 
     def parse_pc(self, response):
-        tmp = response.xpath('//div[@class="banner_txt"]/p[@class="verson_txt"]/text()').get().split('/')
+        tmp = response.xpath(
+            '//div[@class="banner_txt"]/p[@class="verson_txt"]/text()').get().split('/')
         version = tmp[0]
         version_date = tmp[1]
-        down_url = response.xpath('//div[@class="banner_txt"]/p[@class="verson_txt"]/preceding-sibling::a/@href').get()
+        down_url = response.xpath(
+            '//div[@class="banner_txt"]/p[@class="verson_txt"]/preceding-sibling::a/@href').get()
 
         item = AppMonitorItem()
         item['name'] = 'WPS(PC)'
@@ -23,10 +26,12 @@ class WpsSpider(scrapy.Spider):
         return item
 
     def parse_mac(self, response):
-        tmp = response.xpath('//div[@class="banner"]/p[@class="banner_txt"]/text()').get().split('/')
+        tmp = response.xpath(
+            '//div[@class="banner"]/p[@class="banner_txt"]/text()').get().split('/')
         version = tmp[0]
         version_date = tmp[1]
-        down_url = response.xpath('//div[@class="banner"]/p[@class="banner_txt"]/preceding-sibling::a/@data-href').get()
+        down_url = response.xpath(
+            '//div[@class="banner"]/p[@class="banner_txt"]/preceding-sibling::a/@data-href').get()
 
         item = AppMonitorItem()
         item['name'] = 'WPS(MAC)'
@@ -38,7 +43,8 @@ class WpsSpider(scrapy.Spider):
         return item
 
     def parse_linux(self, response):
-        version = response.xpath('//div[@class="banner"]/p[@class="banner_txt"]/text()').get()
+        version = response.xpath(
+            '//div[@class="banner"]/p[@class="banner_txt"]/text()').get()
 
         item = AppMonitorItem()
         item['name'] = 'WPS(Linux)'
