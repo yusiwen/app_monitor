@@ -10,6 +10,11 @@ class CalibreSpider(scrapy.Spider):
     allowed_domains = ['calibre-ebook.com']
     start_urls = ['https://calibre-ebook.com/whats-new']
 
+    def _check_version(self, ver):
+        if len(ver.split('.')) == 2:
+            ver = ver + '.0'
+        return ver
+
     def parse(self, response):
         tmp = response.xpath('//div[@id="release-pane"]/div').extract_first()
         doc = lxml.html.fromstring(tmp)
@@ -29,5 +34,14 @@ class CalibreSpider(scrapy.Spider):
             '(//div[@id="content"]//h2)[1]/following-sibling::ul').extract())
         item['notes'] = notes
         item['id'] = 'calibre'
-        item['download_url'] = 'https://calibre-ebook.com/dist/portable'
+
+        down_urls = []
+        ver = self._check_version(version)
+        base_url = 'https://download.calibre-ebook.com/'
+        down_urls.append(base_url + ver +
+                         '/calibre-portable-installer-' + ver + '.exe')
+        down_urls.append(base_url + ver + '/calibre-' + ver + '.dmg')
+        down_urls.append(base_url + ver + '/calibre-' + ver + '-x86_64.txz')
+
+        item['download_url'] = down_urls
         return item
