@@ -32,7 +32,7 @@ class AppMonitorPipeline(object):
             with open(filename, 'r') as file:
                 data = file.readline()
                 if version.parse(data) < version.parse(item['version']):
-                    self._send_mail(item)
+                    mail.send_mail(item)
                 else:
                     logging.info('No Update found, skipping...')
         else:
