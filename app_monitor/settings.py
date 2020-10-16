@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import json
 import configparser
 
 # Scrapy settings for app_monitor project
@@ -106,9 +107,20 @@ PROXY_HOST = ''
 PROXY_USERNAME = ''
 PROXY_PASSWORD = ''
 
+ES_ENABLE = False
+ES_HOSTS = []
+ES_USERNAME = ''
+ES_PASSWORD = ''
+ES_USE_SSL = True
+ES_PORT = 443
+ES_CERT = ''
+ES_INDEX = ''
+ES_TYPE = ''
+
 if not os.path.isfile(os.path.expanduser(APP_MONITOR_CONFIG_FILE)):
     SEND_MAIL = False
     USE_PROXY = False
+    ES_ENABLE = False
 else:
     config = configparser.ConfigParser()
     config.read(os.path.expanduser(APP_MONITOR_CONFIG_FILE))
@@ -125,3 +137,15 @@ else:
     PROXY_HOST = config['proxy']['url']
     PROXY_USERNAME = config['proxy']['username']
     PROXY_PASSWORD = config['proxy']['password']
+
+    ES_ENABLE = config.getboolean('elasticsearch', 'enable')
+    ES_HOSTS = config.get('elasticsearch', 'hosts').split(',')
+    ES_PORT = config.getint('elasticsearch', 'port')
+    ES_USERNAME = config['elasticsearch']['username']
+    ES_PASSWORD = config['elasticsearch']['password']
+    ES_USE_SSL = config['elasticsearch']['use_ssl']
+    ES_CERT = config['elasticsearch']['cert']
+    ES_INDEX = config['elasticsearch']['index']
+    ES_TYPE = config['elasticsearch']['type']
+    if ES_TYPE == '':
+        ES_TYPE = '_doc'
