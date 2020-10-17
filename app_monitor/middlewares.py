@@ -6,10 +6,10 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 import logging
-import app_monitor.settings
 
 from scrapy import signals
 from w3lib.http import basic_auth_header
+from app_monitor import settings
 
 
 class AppMonitorSpiderMiddleware(object):
@@ -72,6 +72,12 @@ class AppMonitorDownloaderMiddleware(object):
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
 
+    def spider_opened(self, spider):
+        usr = getattr(spider, 'http_user', '')
+        pwd = getattr(spider, 'http_pass', '')
+        if usr and pwd:
+            self.auth = basic_auth_header(usr, pwd)
+
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
         # middleware.
@@ -82,12 +88,16 @@ class AppMonitorDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        if app_monitor.settings.USE_PROXY:
+        if settings.USE_PROXY:
             logging.info('PROXY ENABLED')
             request.meta['proxy'] = "http://192.168.2.54:7890"
-            if (not app_monitor.settings.PROXY_USERNAME) and (not app_monitor.settings.PROXY_PASSWORD):
+            if (not settings.PROXY_USERNAME) and (not settings.PROXY_PASSWORD):
                 request.headers['Proxy-Authorization'] = basic_auth_header(
-                    app_monitor.settings.PROXY_USERNAME, app_monitor.settings.PROXY_PASSWORD)
+                    settings.PROXY_USERNAME, settings.PROXY_PASSWORD)
+
+        auth = getattr(self, 'auth', None)
+        if auth and b'Authorization' not in request.headers:
+            request.headers[b'Authorization'] = auth
 
         return None
 

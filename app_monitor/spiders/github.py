@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
-import re
 
+from app_monitor import settings
 from app_monitor.items import AppMonitorItem
+
 
 class GithubSpider(scrapy.Spider):
     name = 'github'
@@ -43,19 +44,26 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/alibaba/nacos/releases/latest',
         'https://api.github.com/repos/laurent22/joplin/releases/latest'
     ]
+    http_user = settings.GITHUB_USER
+    http_pass = settings.GITHUB_ACCESS_TOKEN
 
     def _parse_assets(self, app_id, version, **data):
         filtered = data['assets']
         output = []
         if app_id == 'gitea':
-            output = [x for x in filtered if x['name'] == 'gitea-' + version[1:] + '-linux-amd64']
+            output = [x for x in filtered if x['name'] ==
+                      'gitea-' + version[1:] + '-linux-amd64']
         elif app_id == 'keeweb':
-            o1 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.win.x64.zip']
-            o2 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.linux.x64.deb']
-            o3 = [x for x in filtered if x['name'] == 'KeeWeb-' + version[1:] + '.mac.dmg']
+            o1 = [x for x in filtered if x['name'] ==
+                  'KeeWeb-' + version[1:] + '.win.x64.zip']
+            o2 = [x for x in filtered if x['name'] ==
+                  'KeeWeb-' + version[1:] + '.linux.x64.deb']
+            o3 = [x for x in filtered if x['name'] ==
+                  'KeeWeb-' + version[1:] + '.mac.dmg']
             output = o1 + o2 + o3
         elif app_id == 'git':
-            output = [x for x in filtered if x['name'] == 'Git-' + version + '-64-bit.exe']
+            output = [x for x in filtered if x['name']
+                      == 'Git-' + version + '-64-bit.exe']
 
         if len(output) == 1:
             return output[0]['browser_download_url']
@@ -67,9 +75,8 @@ class GithubSpider(scrapy.Spider):
         else:
             return ''
 
-
     def parse(self, response):
-        app_id = response.url.rsplit('/', 3)[-3]
+        app_id = response.request.url.rsplit('/', 3)[-3]
         json_dict = response.json()
         version = json_dict['tag_name']
         date = json_dict['created_at']
@@ -82,4 +89,3 @@ class GithubSpider(scrapy.Spider):
         item['id'] = app_id
         item['download_url'] = json_dict['html_url']
         return item
-

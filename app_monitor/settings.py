@@ -117,6 +117,9 @@ ES_CERT = ''
 ES_INDEX = ''
 ES_TYPE = ''
 
+GITHUB_USER = ''
+GITHUB_ACCESS_TOKEN = ''
+
 if not os.path.isfile(os.path.expanduser(APP_MONITOR_CONFIG_FILE)):
     SEND_MAIL = False
     USE_PROXY = False
@@ -149,3 +152,6 @@ else:
     ES_TYPE = config['elasticsearch']['type']
     if ES_TYPE == '':
         ES_TYPE = '_doc'
+
+    GITHUB_USER = config['github']['username']
+    GITHUB_ACCESS_TOKEN = config['github']['access_token']
