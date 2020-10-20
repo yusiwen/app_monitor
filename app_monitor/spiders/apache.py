@@ -15,7 +15,7 @@ class ApacheSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Apache Maven'
         item['version'] = version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-maven'
         item['download_url'] = response.xpath(
@@ -29,7 +29,7 @@ class ApacheSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Apache Tomcat ' + str_ver_no
         item['version'] = version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-tomcat' + str_ver_no
 
@@ -50,7 +50,7 @@ class ApacheSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Apache Karaf Runtime'
         item['version'] = core_version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-karaf-runtime'
         item['download_url'] = response.xpath(
@@ -62,7 +62,7 @@ class ApacheSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Apache Karaf Cellar'
         item['version'] = cellar_version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-karaf-cellar'
         item['download_url'] = 'http://karaf.apache.org/download.html#cellar-installation'
@@ -73,7 +73,7 @@ class ApacheSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Apache Karaf Cave'
         item['version'] = cave_version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-karaf-cave'
         item['download_url'] = 'http://karaf.apache.org/download.html#cave-installation'
@@ -84,7 +84,7 @@ class ApacheSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Apache Karaf Decanter'
         item['version'] = decanter_version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-karaf-decanter'
         item['download_url'] = 'http://karaf.apache.org/download.html#decanter-installation'
@@ -98,7 +98,7 @@ class ApacheSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Apache Felix'
         item['version'] = version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = 'Changelog: ' + response.xpath(base_path +
                                                        '/following-sibling::td[1]/a/@href').get()
         item['id'] = 'apache-felix'

@@ -13,7 +13,7 @@ class VirtualboxSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'VirtualBox'
         item['version'] = version
-        item['date'] = ''
+        item['date'] = None 
         item['notes'] = ''
         item['id'] = 'virtualbox'
 

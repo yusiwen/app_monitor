@@ -14,7 +14,7 @@ class GoSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'Golang'
         item['version'] = version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'go'
         item['download_url'] = 'https://golang.org' + down_url

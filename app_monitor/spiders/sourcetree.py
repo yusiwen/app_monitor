@@ -25,7 +25,7 @@ class SourcetreeSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'SourceTree ' + tag
         item['version'] = version
-        item['date'] = ''
+        item['date'] = None
         item['notes'] = ''
         item['id'] = app_id
         item['download_url'] = dwn_url
