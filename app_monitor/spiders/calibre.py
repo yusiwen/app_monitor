@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import lxml.html
+import logging
 
 from app_monitor.items import AppMonitorItem
+from datetime import datetime
 
 
 class CalibreSpider(scrapy.Spider):
@@ -22,12 +24,14 @@ class CalibreSpider(scrapy.Spider):
         version = tmp.split()[1]
         date = tmp.split('[')[1]
         date = date.replace(']', '')
+        dateobj = datetime.strptime(date, '%d %b, %Y')
+        datestr = dateobj.strftime('%Y-%m-%d')
 
         item = AppMonitorItem()
         item['name'] = 'Calibre'
         item['version'] = version
 
-        item['date'] = date
+        item['date'] = datestr
 
         notes = ''
         notes = notes.join(response.xpath(

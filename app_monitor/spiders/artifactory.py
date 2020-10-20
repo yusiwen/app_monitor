@@ -2,6 +2,7 @@
 import scrapy
 
 from app_monitor.items import AppMonitorItem
+from datetime import datetime
 
 
 class ArtifactorySpider(scrapy.Spider):
@@ -13,12 +14,14 @@ class ArtifactorySpider(scrapy.Spider):
     def parse(self, response):
         version = response.url.rsplit('/', 1)[-1]
         date = response.xpath('//div[@id="versionPublishedDate"]/text()').get()
-        date = date.split('Updated in', 1)[1].strip()
+        date = datetime.strptime(date.split('Updated in', 1)[1].strip(), '%b %d, %Y')
+        datestr = date.strftime('%Y-%m-%d')
+
 
         item = AppMonitorItem()
         item['name'] = 'jfrog-artifactory-oss'
         item['version'] = version
-        item['date'] = date
+        item['date'] = datestr
         item['notes'] = ''
         item['id'] = 'artifactory'
         item['download_url'] = 'https://bintray.com' + response.xpath(
