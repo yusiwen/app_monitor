@@ -3,6 +3,7 @@ import scrapy
 import json
 
 from app_monitor.items import AppMonitorItem
+from datetime import datetime
 
 
 class ChromeSpider(scrapy.Spider):
@@ -16,13 +17,15 @@ class ChromeSpider(scrapy.Spider):
         versions = filtered_dict[0]['versions']
         output = [x for x in versions if x['channel'] == 'stable']
         version = '{current_version}'.format(**output[0])
-        date = '{current_reldate}'.format(**output[0])
+        date = datetime.strptime('{current_reldate}'.format(**output[0]), '%m/%d/%y')
+        datestr = date.strftime('%Y-%m-%d')
+
         previous_version = '{previous_version}'.format(**output[0])
 
         item = AppMonitorItem()
         item['name'] = 'google-chrome-browser'
         item['version'] = version
-        item['date'] = date
+        item['date'] = datestr
         item['notes'] = '<a href="https://chromium.googlesource.com/chromium/src/+log/{}..{}?pretty=fuller&n=10000">Changelog</a>'.format(
             previous_version, version)
         item['id'] = 'chrome'
