@@ -64,7 +64,7 @@ def update(item):
             index=settings.ES_INDEX,
             doc_type=settings.ES_TYPE,
             id=item['id'],
-            body=_get_data(item))
+            body='{"doc":' + _get_data(item) + '}')
         if not result:
             logging.error('ERROR: Elasticsearch update document error')
     finally:
