@@ -56,7 +56,7 @@ class WpsSpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = ''
         item['id'] = 'wps-linux'
-        item['download_url'] = response.url
+        item['download_url'] = response.xpath('//div[@class="box"]//a[contains(@href, "amd64.deb")]/@href').get()
         return item
 
     def parse(self, response):
