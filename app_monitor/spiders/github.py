@@ -42,6 +42,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/grafana/grafana/releases/latest',
         'https://api.github.com/repos/jenkinsci/jenkins/releases/latest',
         'https://api.github.com/repos/alibaba/nacos/releases/latest',
+        'https://api.github.com/repos/ankitects/anki/releases/latest',
         'https://api.github.com/repos/laurent22/joplin/releases/latest'
     ]
     http_user = settings.GITHUB_USER
