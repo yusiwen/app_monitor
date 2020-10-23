@@ -50,9 +50,9 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# SPIDER_MIDDLEWARES = {
-#    'app_monitor.middlewares.AppMonitorSpiderMiddleware': 543,
-# }
+SPIDER_MIDDLEWARES = {
+    'app_monitor.middlewares.AppMonitorSpiderMiddleware': 543,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
@@ -152,6 +152,6 @@ else:
     ES_TYPE = config['elasticsearch']['type']
     if ES_TYPE == '':
         ES_TYPE = '_doc'
-
+    
     GITHUB_USER = config['github']['username']
     GITHUB_ACCESS_TOKEN = config['github']['access_token']

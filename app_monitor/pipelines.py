@@ -2,8 +2,7 @@
 import os
 import errno
 import logging
-
-import json
+import datetime
 
 from packaging import version
 from app_monitor import settings
@@ -39,6 +38,8 @@ class AppMonitorPipeline(object):
             return self._get_previous_version_from_file(item)
 
     def _save_version(self, item, update=False):
+        item['last_check_time'] = str(datetime.datetime.now())
+        item['last_check_status'] = 'success'
         if settings.ES_ENABLE:
             if update:
                 es.update(item)
