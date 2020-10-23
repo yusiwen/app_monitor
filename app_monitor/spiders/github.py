@@ -29,6 +29,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/janeczku/calibre-web/releases/latest',
         'https://api.github.com/repos/goharbor/harbor/releases/latest',
         'https://api.github.com/repos/elastic/elasticsearch/releases/latest',
+        'https://api.github.com/repos/medcl/elasticsearch-analysis-ik/releases/latest',
         'https://api.github.com/repos/elastic/logstash/releases/latest',
         'https://api.github.com/repos/elastic/kibana/releases/latest',
         'https://api.github.com/repos/kubernetes/kubernetes/releases/latest',
