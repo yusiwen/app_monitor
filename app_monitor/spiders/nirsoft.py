@@ -28,7 +28,7 @@ class NirsoftSpider(scrapy.Spider):
             x = i.xpath('@href').get()
             if not x.startswith('http'):
                 x = 'http://www.nirsoft.net/utils/' + x
-            down_urls.append(x)
+                down_urls.append(x)
 
         item = AppMonitorItem()
         item['name'] = app_id
