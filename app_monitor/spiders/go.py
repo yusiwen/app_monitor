@@ -16,7 +16,7 @@ class GoSpider(scrapy.Spider):
         path_templ = Template('//h3[@id="stable"]/following-sibling::div[1]//table//a[contains(text(), "$arch")]/@href')
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='linux-amd64')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='darwin-amd64')).get())
-        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64')).get())
+        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64.msi')).get())
         
 
         item = AppMonitorItem()
