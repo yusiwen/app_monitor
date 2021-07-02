@@ -21,7 +21,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest',
         'https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest',
         'https://api.github.com/repos/be5invis/Iosevka/releases/latest',
-        'https://api.github.com/repos/Eugeny/terminus/releases/latest',
+        'https://api.github.com/repos/Eugeny/tabby/releases/latest',
         'https://api.github.com/repos/dbeaver/dbeaver/releases/latest',
         'https://api.github.com/repos/microsoft/vscode/releases/latest',
         'https://api.github.com/repos/cdr/code-server/releases/latest',
