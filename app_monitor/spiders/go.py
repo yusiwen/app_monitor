@@ -17,7 +17,7 @@ class GoSpider(scrapy.Spider):
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='linux-amd64')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='darwin-amd64')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64.msi')).get())
-        
+        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64.zip')).get())
 
         item = AppMonitorItem()
         item['name'] = 'Golang'
