@@ -10,12 +10,12 @@ class GoSpider(scrapy.Spider):
     start_urls = ['https://golang.org/dl/']
 
     def parse(self, response):
-        version = response.xpath('//h3[@id="stable"]/following-sibling::div[1]//h2[1]/text()').get().split(' ')[0].replace('go', '')
+        version = response.xpath('//h2[@id="stable"]/following-sibling::div[1]/@id').get().split(' ')[0].replace('go', '')
         down_urls = []
         down_url_prefix = 'https://golang.org'
-        path_templ = Template('//h3[@id="stable"]/following-sibling::div[1]//table//a[contains(text(), "$arch")]/@href')
-        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='linux-amd64')).get())
-        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='darwin-amd64')).get())
+        path_templ = Template('//h2[@id="stable"]/following-sibling::div[1]//table//a[contains(text(), "$arch")]/@href')
+        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='linux-amd64.tar.gz')).get())
+        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='darwin-amd64.pkg')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64.msi')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64.zip')).get())
 

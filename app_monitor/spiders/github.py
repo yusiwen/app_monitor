@@ -47,7 +47,8 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/ankitects/anki/releases/latest',
         'https://api.github.com/repos/tmux/tmux/releases/latest',
         'https://api.github.com/repos/laurent22/joplin/releases/latest',
-        'https://api.github.com/repos/gradle/gradle/releases/latest'
+        'https://api.github.com/repos/gradle/gradle/releases/latest',
+        'https://api.github.com/repos/Alexey-T/CudaText/releases/latest'
     ]
     http_user = settings.GITHUB_USER
     http_pass = settings.GITHUB_ACCESS_TOKEN

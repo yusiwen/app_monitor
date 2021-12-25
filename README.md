@@ -3,7 +3,7 @@
 ## Prerequisite
 
 ```sh
-pip3 install setuptools wheel scrapy packaging
+pip3 install setuptools wheel scrapy packaging elasticsearch
 ```
 
 ## Setting
