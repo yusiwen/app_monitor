@@ -16,8 +16,8 @@ class NodeSpider(scrapy.Spider):
         item['name'] = 'Node.js LTS'
         item['version'] = version
 
-        item['date'] = ''
-        item['notes'] = ''
+        item['date'] = None
+        item['notes'] = None
         item['id'] = 'node-lts'
         
         down_urls = []
