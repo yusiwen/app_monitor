@@ -31,6 +31,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/git-for-windows/git/releases/latest',
         'https://api.github.com/repos/gitextensions/gitextensions/releases/latest',
         'https://api.github.com/repos/goharbor/harbor/releases/latest',
+        'https://api.github.com/repos/graalvm/graalvm-ce-builds/releases/latest',
         'https://api.github.com/repos/gradle/gradle/releases/latest',
         'https://api.github.com/repos/grafana/grafana/releases/latest',
         'https://api.github.com/repos/janeczku/calibre-web/releases/latest',
