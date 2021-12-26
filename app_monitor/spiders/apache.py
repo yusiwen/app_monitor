@@ -6,7 +6,9 @@ class ApacheSpider(scrapy.Spider):
     name = 'apache'
     allowed_domains = ['apache.org']
     start_urls = ['http://maven.apache.org/download.cgi',
-                  'https://tomcat.apache.org/download-80.cgi', 'https://tomcat.apache.org/download-90.cgi', 'http://karaf.apache.org/download.html',
+                  'https://tomcat.apache.org/download-80.cgi',
+                  'https://tomcat.apache.org/download-90.cgi',
+                  'http://karaf.apache.org/download.html',
                   'https://felix.apache.org/downloads.cgi']
 
     def _parse_maven(self, response):
