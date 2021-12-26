@@ -10,6 +10,9 @@ class GithubSpider(scrapy.Spider):
     name = 'github'
     allowed_domains = ['api.github.com']
     start_urls = [
+        'https://api.github.com/repos/adoptium/temurin8-binaries/releases/latest',
+        'https://api.github.com/repos/adoptium/temurin11-binaries/releases/latest',
+        'https://api.github.com/repos/adoptium/temurin17-binaries/releases/latest',
         'https://api.github.com/repos/Alexey-T/CudaText/releases/latest',
         'https://api.github.com/repos/Dreamacro/clash/releases/latest',
         'https://api.github.com/repos/Eugeny/tabby/releases/latest',
