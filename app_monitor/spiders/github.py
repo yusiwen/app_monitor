@@ -29,6 +29,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/elastic/elasticsearch/releases/latest',
         'https://api.github.com/repos/elastic/kibana/releases/latest',
         'https://api.github.com/repos/elastic/logstash/releases/latest',
+        'https://api.github.com/repos/FredrikNoren/ungit/releases/latest',
         'https://api.github.com/repos/git-for-windows/git/releases/latest',
         'https://api.github.com/repos/gitextensions/gitextensions/releases/latest',
         'https://api.github.com/repos/goharbor/harbor/releases/latest',
