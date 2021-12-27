@@ -63,7 +63,8 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/shadowsocks/ShadowsocksX-NG/releases/latest',
         'https://api.github.com/repos/shadowsocks/shadowsocks-windows/releases/latest',
         'https://api.github.com/repos/tmux/tmux/releases/latest',
-        'https://api.github.com/repos/visualfc/liteide/releases/latest'
+        'https://api.github.com/repos/visualfc/liteide/releases/latest',
+        'https://api.github.com/repos/zealdocs/zeal/releases/latest'
     ]
     http_user = settings.GITHUB_USER
     http_pass = settings.GITHUB_ACCESS_TOKEN
