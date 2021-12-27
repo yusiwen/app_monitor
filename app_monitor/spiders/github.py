@@ -56,6 +56,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/prometheus/node_exporter/releases/latest',
         'https://api.github.com/repos/prometheus/prometheus/releases/latest',
         'https://api.github.com/repos/prometheus/pushgateway/releases/latest',
+        'https://api.github.com/repos/qishibo/AnotherRedisDesktopManager/releases/latest',
         'https://api.github.com/repos/redis/redis/releases/latest',
         'https://api.github.com/repos/rust-lang/rust/releases/latest',
         'https://api.github.com/repos/shadowsocks/ShadowsocksX-NG/releases/latest',
