@@ -39,6 +39,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/grafana/grafana/releases/latest',
         'https://api.github.com/repos/harness/drone/releases/latest',
         'https://api.github.com/repos/hashicorp/consul/releases/latest',
+        'https://api.github.com/repos/HeidiSQL/HeidiSQL/releases/latest',
         'https://api.github.com/repos/janeczku/calibre-web/releases/latest',
         'https://api.github.com/repos/jenkinsci/jenkins/releases/latest',
         'https://api.github.com/repos/keeweb/keeweb/releases/latest',
