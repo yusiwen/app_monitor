@@ -15,6 +15,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/adoptium/temurin17-binaries/releases/latest',
         'https://api.github.com/repos/Alexey-T/CudaText/releases/latest',
         'https://api.github.com/repos/alibaba/arthas/releases/latest',
+        'https://api.github.com/repos/audacity/audacity/releases/latest',
         'https://api.github.com/repos/beekeeper-studio/beekeeper-studio/releases/latest',
         'https://api.github.com/repos/Dreamacro/clash/releases/latest',
         'https://api.github.com/repos/Eugeny/tabby/releases/latest',
