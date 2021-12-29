@@ -91,7 +91,7 @@ class AppMonitorDownloaderMiddleware(object):
         #   installed downloader middleware will be called
         if settings.USE_PROXY:
             logging.info('PROXY ENABLED')
-            request.meta['proxy'] = "http://192.168.2.54:7890"
+            request.meta['proxy'] = settings.PROXY_HOST
             if (not settings.PROXY_USERNAME) and (not settings.PROXY_PASSWORD):
                 request.headers['Proxy-Authorization'] = basic_auth_header(
                     settings.PROXY_USERNAME, settings.PROXY_PASSWORD)
