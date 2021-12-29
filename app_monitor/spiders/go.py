@@ -1,6 +1,7 @@
+from string import Template
+
 import scrapy
 
-from string import Template
 from app_monitor.items import AppMonitorItem
 
 
@@ -10,7 +11,8 @@ class GoSpider(scrapy.Spider):
     start_urls = ['https://golang.org/dl/']
 
     def parse(self, response):
-        version = response.xpath('//h2[@id="stable"]/following-sibling::div[1]/@id').get().split(' ')[0].replace('go', '')
+        version = response.xpath('//h2[@id="stable"]/following-sibling::div[1]/@id').get().split(' ')[0].replace('go',
+                                                                                                                 '')
         down_urls = []
         down_url_prefix = 'https://golang.org'
         path_templ = Template('//h2[@id="stable"]/following-sibling::div[1]//table//a[contains(text(), "$arch")]/@href')

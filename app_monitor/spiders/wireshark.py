@@ -11,7 +11,7 @@ class WiresharkSpider(scrapy.Spider):
     def parse(self, response):
         tmp = response.xpath('//section//a[contains(text(), "Stable Release")]/text()').get()
         version = tmp.split('(')[1].split(')')[0]
-        
+
         item = AppMonitorItem()
         item['name'] = 'Wireshark'
         item['version'] = version
@@ -21,5 +21,5 @@ class WiresharkSpider(scrapy.Spider):
         item['id'] = 'wireshark'
         item['download_url'] = response.xpath(
             '//section//a[contains(text(), "Stable Release")]/parent::div/following-sibling::div[1]//li').getall()
-        
+
         return item

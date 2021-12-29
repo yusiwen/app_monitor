@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import scrapy
 import json
+from datetime import datetime
+
+import scrapy
 
 from app_monitor.items import AppMonitorItem
-from datetime import datetime
 
 
 class ChromeSpider(scrapy.Spider):
@@ -26,7 +27,8 @@ class ChromeSpider(scrapy.Spider):
         item['name'] = 'google-chrome-browser'
         item['version'] = version
         item['date'] = datestr
-        item['notes'] = '<a href="https://chromium.googlesource.com/chromium/src/+log/{}..{}?pretty=fuller&n=10000">Changelog</a>'.format(
+        item[
+            'notes'] = '<a href="https://chromium.googlesource.com/chromium/src/+log/{}..{}?pretty=fuller&n=10000">Changelog</a>'.format(
             previous_version, version)
         item['id'] = 'chrome'
         item['download_url'] = 'https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1'

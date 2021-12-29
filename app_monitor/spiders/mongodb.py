@@ -3,6 +3,7 @@ import scrapy
 
 from app_monitor.items import AppMonitorItem
 
+
 class MongodbSpider(scrapy.Spider):
     name = 'mongodb'
     allowed_domains = ['www.mongodb.com']

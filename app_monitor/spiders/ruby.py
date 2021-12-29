@@ -10,8 +10,8 @@ class RubySpider(scrapy.Spider):
 
     def parse(self, response):
         url = response.xpath('//h3[contains(text(), "with Devkit")]/following-sibling::ul/li[1]/a[1]/@href').get()
-        version = url.rsplit('/',2)[1].split('-', 1)[1]
-        
+        version = url.rsplit('/', 2)[1].split('-', 1)[1]
+
         item = AppMonitorItem()
         item['name'] = 'Ruby'
         item['version'] = version
@@ -20,5 +20,5 @@ class RubySpider(scrapy.Spider):
         item['notes'] = None
         item['id'] = 'ruby'
         item['download_url'] = url
-        
+
         return item

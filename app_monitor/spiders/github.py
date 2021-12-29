@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import json
 
 from app_monitor import settings
 from app_monitor.items import AppMonitorItem

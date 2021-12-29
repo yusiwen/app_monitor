@@ -11,7 +11,7 @@ class NmapSpider(scrapy.Spider):
     def parse(self, response):
         url = response.xpath('//tr/td//b/u[text() = "stable"]/following-sibling::a[1]/text()').get()
         version = url.split('-')[1]
-        
+
         item = AppMonitorItem()
         item['name'] = 'nmap'
         item['version'] = version
@@ -20,6 +20,5 @@ class NmapSpider(scrapy.Spider):
         item['notes'] = None
         item['id'] = 'nmap'
         item['download_url'] = url
-        
-        return item
 
+        return item

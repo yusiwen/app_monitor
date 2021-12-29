@@ -1,4 +1,5 @@
 import scrapy
+
 from app_monitor.items import AppMonitorItem
 
 
@@ -13,7 +14,7 @@ class VirtualboxSpider(scrapy.Spider):
         item = AppMonitorItem()
         item['name'] = 'VirtualBox'
         item['version'] = version
-        item['date'] = None 
+        item['date'] = None
         item['notes'] = ''
         item['id'] = 'virtualbox'
 

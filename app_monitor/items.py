@@ -7,6 +7,7 @@
 
 import scrapy
 
+
 class AppMonitorItem(scrapy.Item):
     id = scrapy.Field()
     name = scrapy.Field()
@@ -17,5 +18,3 @@ class AppMonitorItem(scrapy.Item):
     last_check_time = scrapy.Field()
     last_check_status = scrapy.Field()
     last_check_exception = scrapy.Field()
-
-

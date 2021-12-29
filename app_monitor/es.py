@@ -3,11 +3,11 @@ import logging
 
 from elasticsearch import Elasticsearch
 from elasticsearch import NotFoundError
+
 from app_monitor import settings
 
 
 def _init_elasticsearch():
-
     es = Elasticsearch(
         settings.ES_HOSTS,
         http_auth=(settings.ES_USERNAME,
@@ -18,7 +18,6 @@ def _init_elasticsearch():
 
 
 def get(app_id):
-
     # check index if it exists
     es = _init_elasticsearch()
     if not es.indices.exists(index=settings.ES_INDEX):
@@ -42,7 +41,6 @@ def _get_data(item):
 
 
 def add(item):
-
     es = _init_elasticsearch()
     try:
         result = es.index(
@@ -57,7 +55,6 @@ def add(item):
 
 
 def update(item):
-
     es = _init_elasticsearch()
     try:
         result = es.update(

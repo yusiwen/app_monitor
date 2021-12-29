@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-import os
+import datetime
 import errno
 import logging
-import datetime
+import os
 
 from packaging import version
-from app_monitor import settings
-from app_monitor import mail
+
 from app_monitor import es
+from app_monitor import mail
+from app_monitor import settings
+
 
 # Define your item pipelines here
 #

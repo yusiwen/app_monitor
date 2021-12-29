@@ -1,7 +1,8 @@
+from datetime import datetime
+
 import scrapy
 
 from app_monitor.items import AppMonitorItem
-from datetime import datetime
 
 
 class WpsSpider(scrapy.Spider):

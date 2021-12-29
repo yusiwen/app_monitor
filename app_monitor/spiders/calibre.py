@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import scrapy
+from datetime import datetime
+
 import lxml.html
-import logging
+import scrapy
 
 from app_monitor.items import AppMonitorItem
-from datetime import datetime
 
 
 class CalibreSpider(scrapy.Spider):
