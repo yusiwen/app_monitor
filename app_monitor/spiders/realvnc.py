@@ -24,7 +24,7 @@ class RealvncSpider(scrapy.Spider):
         item['download_url'] = down_url
         return item
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         if response.request.url.find('viewer'):
             yield self._parse_realvnc(response, 'RealVNC Viewer', 'realvnc-viewer')
         else:

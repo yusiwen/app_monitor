@@ -9,7 +9,7 @@ class MongodbSpider(scrapy.Spider):
     allowed_domains = ['www.mongodb.com']
     start_urls = ['https://www.mongodb.com/download-center/community']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         tmp = response.xpath('//main//select/option[text()[re:test(.,".*current\srelease\)$")]]/text()').get()
         version = tmp.split()[0]
 

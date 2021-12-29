@@ -8,7 +8,7 @@ class FilezillaSpider(scrapy.Spider):
     allowed_domains = ['filezilla-project.org']
     start_urls = ['https://filezilla-project.org/download.php?show_all=1']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         version = response.xpath('//p[contains(text(), "latest stable version")]/text()').get().split(' ')[-1]
         down_urls = []
         down_urls.append(response.xpath('//a[contains(text(), "win64.zip")]/@href').get())

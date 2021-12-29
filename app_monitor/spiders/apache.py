@@ -109,7 +109,7 @@ class ApacheSpider(scrapy.Spider):
                                               '/following-sibling::td[2]/a[contains(text(), "zip")]/@href').get()
         return item
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         unit = response.url.split('//')[-1].split('.')[0]
         if unit == 'maven':
             return self._parse_maven(response)

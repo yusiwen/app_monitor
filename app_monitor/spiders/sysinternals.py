@@ -18,7 +18,7 @@ class SysinternalsSpider(scrapy.Spider):
 
     ]
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         app_id = response.request.url.rsplit('/', 3)[-1]
         version = response.xpath('//main/h1')[0].xpath('text()').get().split(' ')[-1]
         date = response.xpath('//main//p[contains(text(), "Published: ")]/text()').get().split(': ')[-1]

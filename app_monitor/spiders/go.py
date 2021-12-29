@@ -10,7 +10,7 @@ class GoSpider(scrapy.Spider):
     allowed_domains = ['golang.org']
     start_urls = ['https://golang.org/dl/']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         version = response.xpath('//h2[@id="stable"]/following-sibling::div[1]/@id').get().split(' ')[0].replace('go',
                                                                                                                  '')
         down_urls = []

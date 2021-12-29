@@ -31,7 +31,7 @@ class SourcetreeSpider(scrapy.Spider):
         item['download_url'] = dwn_url
         yield item
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         for item in self._parse_item('sourcetree-mac', 'Mac', response):
             yield item
         for item in self._parse_item('sourcetree-win', 'Windows', response):

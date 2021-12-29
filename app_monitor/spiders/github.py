@@ -97,7 +97,7 @@ class GithubSpider(scrapy.Spider):
         else:
             return ''
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         app_id = response.request.url.rsplit('/', 3)[-3]
         json_dict = response.json()
         version = json_dict['tag_name']

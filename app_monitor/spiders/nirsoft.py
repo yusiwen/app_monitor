@@ -18,7 +18,7 @@ class NirsoftSpider(scrapy.Spider):
         'http://www.nirsoft.net/utils/registered_dll_view.html'
     ]
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         title = response.xpath('//table[@class="utilcaption"]//td')[1].xpath('text()').get()
         version = re.search(r'v([\d.]+)', title).group(0)
         app_id = title.split(version)[0].strip()

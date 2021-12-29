@@ -17,7 +17,7 @@ class CalibreSpider(scrapy.Spider):
             ver = ver + '.0'
         return ver
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         tmp = response.xpath('//div[@id="release-pane"]/div').extract_first()
         doc = lxml.html.fromstring(tmp)
         tmp = doc.xpath('//h2/text()')[0]

@@ -12,7 +12,7 @@ class ChromeSpider(scrapy.Spider):
     allowed_domains = ['omahaproxy.appspot.com']
     start_urls = ['http://omahaproxy.appspot.com/all.json']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         json_dict = json.loads(response.text)
         filtered_dict = [x for x in json_dict if x['os'] == 'win64']
         versions = filtered_dict[0]['versions']

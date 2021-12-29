@@ -8,7 +8,7 @@ class VirtualboxSpider(scrapy.Spider):
     allowed_domains = ['virtualbox.org']
     start_urls = ['https://www.virtualbox.org/wiki/Downloads/']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         version = response.xpath(
             '//h3[contains(@id, "platformpackages")]/text()').get().strip().split(' ')[0]
         item = AppMonitorItem()

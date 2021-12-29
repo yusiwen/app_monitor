@@ -8,7 +8,7 @@ class AllwaysyncSpider(scrapy.Spider):
     allowed_domains = ['allwaysync.com']
     start_urls = ['https://allwaysync.com/download']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         version = response.xpath('//section//div[@class="panel-body"]/p/strong/text()').get()
         down_urls = []
         down_urls.append(response.xpath('//a[@id="desktop-download-primary"]/@href').get())

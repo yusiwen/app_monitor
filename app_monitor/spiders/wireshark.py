@@ -8,7 +8,7 @@ class WiresharkSpider(scrapy.Spider):
     allowed_domains = ['www.wireshark.org']
     start_urls = ['http://www.wireshark.org/']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         tmp = response.xpath('//section//a[contains(text(), "Stable Release")]/text()').get()
         version = tmp.split('(')[1].split(')')[0]
 

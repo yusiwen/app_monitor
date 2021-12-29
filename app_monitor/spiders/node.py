@@ -9,7 +9,7 @@ class NodeSpider(scrapy.Spider):
     allowed_domains = ['nodejs.org']
     start_urls = ['https://nodejs.org/en/download/']
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         version = response.xpath('//main/div/article/section[1]/p[1]/strong/text()').get()
 
         item = AppMonitorItem()

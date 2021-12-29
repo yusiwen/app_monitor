@@ -60,7 +60,7 @@ class WpsSpider(scrapy.Spider):
         item['download_url'] = response.xpath('//div[@class="box"]//a[contains(@href, "amd64.deb")]/@href').get()
         return item
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         platform = response.url.split('//')[1].split('.')[0]
         if platform == 'pc':
             return self.parse_pc(response)
