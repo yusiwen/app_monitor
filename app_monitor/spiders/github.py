@@ -14,6 +14,8 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/adoptium/temurin17-binaries/releases/latest',
         'https://api.github.com/repos/Alexey-T/CudaText/releases/latest',
         'https://api.github.com/repos/alibaba/arthas/releases/latest',
+        'https://api.github.com/repos/audacity/audacity/releases/latest',
+        'https://api.github.com/repos/beekeeper-studio/beekeeper-studio/releases/latest',
         'https://api.github.com/repos/Dreamacro/clash/releases/latest',
         'https://api.github.com/repos/Eugeny/tabby/releases/latest',
         'https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest',
@@ -28,14 +30,18 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/elastic/elasticsearch/releases/latest',
         'https://api.github.com/repos/elastic/kibana/releases/latest',
         'https://api.github.com/repos/elastic/logstash/releases/latest',
+        'https://api.github.com/repos/FredrikNoren/ungit/releases/latest',
         'https://api.github.com/repos/git-for-windows/git/releases/latest',
+        'https://api.github.com/repos/gitahead/gitahead/releases/latest',
         'https://api.github.com/repos/gitextensions/gitextensions/releases/latest',
+        'https://api.github.com/repos/go-gitea/gitea/releases/latest',
         'https://api.github.com/repos/goharbor/harbor/releases/latest',
         'https://api.github.com/repos/graalvm/graalvm-ce-builds/releases/latest',
         'https://api.github.com/repos/gradle/gradle/releases/latest',
         'https://api.github.com/repos/grafana/grafana/releases/latest',
         'https://api.github.com/repos/harness/drone/releases/latest',
         'https://api.github.com/repos/hashicorp/consul/releases/latest',
+        'https://api.github.com/repos/HeidiSQL/HeidiSQL/releases/latest',
         'https://api.github.com/repos/janeczku/calibre-web/releases/latest',
         'https://api.github.com/repos/jenkinsci/jenkins/releases/latest',
         'https://api.github.com/repos/keeweb/keeweb/releases/latest',
@@ -51,12 +57,14 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/prometheus/node_exporter/releases/latest',
         'https://api.github.com/repos/prometheus/prometheus/releases/latest',
         'https://api.github.com/repos/prometheus/pushgateway/releases/latest',
+        'https://api.github.com/repos/qishibo/AnotherRedisDesktopManager/releases/latest',
         'https://api.github.com/repos/redis/redis/releases/latest',
         'https://api.github.com/repos/rust-lang/rust/releases/latest',
         'https://api.github.com/repos/shadowsocks/ShadowsocksX-NG/releases/latest',
         'https://api.github.com/repos/shadowsocks/shadowsocks-windows/releases/latest',
         'https://api.github.com/repos/tmux/tmux/releases/latest',
-        'https://api.github.com/repos/go-gitea/gitea/releases/latest'
+        'https://api.github.com/repos/visualfc/liteide/releases/latest',
+        'https://api.github.com/repos/zealdocs/zeal/releases/latest'
     ]
     http_user = settings.GITHUB_USER
     http_pass = settings.GITHUB_ACCESS_TOKEN
