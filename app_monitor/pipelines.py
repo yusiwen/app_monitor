@@ -19,27 +19,31 @@ from app_monitor import settings
 
 class AppMonitorPipeline(object):
 
-    def _get_previous_version_from_file(self, item):
+    @staticmethod
+    def __get_previous_version_from_file(item):
         file_name = os.getcwd() + '/output/' + item['id']
         if os.path.isfile(file_name):
             with open(file_name, 'r') as file:
                 return file.readline()
         return None
 
-    def _get_previous_version_from_es(self, item):
+    @staticmethod
+    def __get_previous_version_from_es(item):
         data = es.get(item['id'])
-        if not data == None:
+        if data is not None:
             return data['_source']['version']
         else:
             return None
 
-    def _get_previous_version(self, item):
+    @staticmethod
+    def __get_previous_version(item):
         if settings.ES_ENABLE:
-            return self._get_previous_version_from_es(item)
+            return AppMonitorPipeline.__get_previous_version_from_es(item)
         else:
-            return self._get_previous_version_from_file(item)
+            return AppMonitorPipeline.__get_previous_version_from_file(item)
 
-    def _save_version(self, item, update=False):
+    @staticmethod
+    def __save_version(item, update=False):
         item['last_check_time'] = str(datetime.datetime.now())
         item['last_check_status'] = 'success'
         if settings.ES_ENABLE:
@@ -49,9 +53,10 @@ class AppMonitorPipeline(object):
                 es.add(item)
         else:
             file_name = os.getcwd() + '/output/' + item['id']
-            self._write_data(file_name, item)
+            AppMonitorPipeline.__write_data(file_name, item)
 
-    def _write_data(self, file_name, item):
+    @staticmethod
+    def __write_data(file_name, item):
         if not os.path.exists(os.path.dirname(file_name)):
             try:
                 os.makedirs(os.path.dirname(file_name))
@@ -62,20 +67,22 @@ class AppMonitorPipeline(object):
         with open(file_name, "w") as f:
             f.write(item['version'])
 
-    def _check_version(self, item):
-        previous_ver = self._get_previous_version(item)
-        if not previous_ver == None:
+    @staticmethod
+    def __check_version(item):
+        previous_ver = AppMonitorPipeline.__get_previous_version(item)
+        if previous_ver is not None:
             if version.parse(previous_ver) < version.parse(item['version']):
-                self._save_version(item, update=True)
+                AppMonitorPipeline.__save_version(item, update=True)
                 mail.send_mail(item)
             else:
                 logging.info('No Update found, skipping...')
-        else:
-            self._save_version(item)
+        else:  # if no previous version has been found, then this check is running the first time
+            AppMonitorPipeline.__save_version(item)
             if settings.SEND_MAIL:
                 mail.send_mail(item)
 
-    def process_item(self, item, spider):
+    @staticmethod
+    def process_item(item, spider):
         logging.debug(item)
-        self._check_version(item)
+        AppMonitorPipeline.__check_version(item)
         return item
