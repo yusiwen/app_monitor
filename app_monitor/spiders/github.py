@@ -53,6 +53,7 @@ class GithubSpider(scrapy.Spider):
         'https://api.github.com/repos/laurent22/joplin/releases/latest',
         'https://api.github.com/repos/lxgw/LxgwWenKai/releases/latest',
         'https://api.github.com/repos/medcl/elasticsearch-analysis-ik/releases/latest',
+        'https://api.github.com/repos/microsoft/cascadia-code/releases/latest',
         'https://api.github.com/repos/microsoft/vscode/releases/latest',
         'https://api.github.com/repos/minio/minio/releases/latest',
         'https://api.github.com/repos/prometheus/node_exporter/releases/latest',
