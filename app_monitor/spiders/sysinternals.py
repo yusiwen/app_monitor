@@ -15,7 +15,6 @@ class SysinternalsSpider(scrapy.Spider):
         'https://docs.microsoft.com/zh-cn/sysinternals/downloads/vmmap',
         'https://docs.microsoft.com/zh-cn/sysinternals/downloads/rammap',
         'https://docs.microsoft.com/zh-cn/sysinternals/downloads/sdelete'
-
     ]
 
     def parse(self, response, **kwargs):
