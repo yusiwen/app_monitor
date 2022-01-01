@@ -112,5 +112,6 @@ class GithubSpider(scrapy.Spider):
         item['date'] = date
         item['notes'] = ''
         item['id'] = app_id
+        item['category'] = 'github'
         item['download_url'] = json_dict['html_url']
         return item

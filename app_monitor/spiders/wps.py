@@ -27,6 +27,7 @@ class WpsSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = 'wps-pc'
         item['download_url'] = down_url
+        item['category'] = 'office'
         return item
 
     def parse_mac(self, response):
@@ -45,6 +46,7 @@ class WpsSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = 'wps-mac'
         item['download_url'] = down_url
+        item['category'] = 'office'
         return item
 
     def parse_linux(self, response):
@@ -57,6 +59,7 @@ class WpsSpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = ''
         item['id'] = 'wps-linux'
+        item['category'] = 'office'
         item['download_url'] = response.xpath('//div[@class="box"]//a[contains(@href, "amd64.deb")]/@href').get()
         return item
 

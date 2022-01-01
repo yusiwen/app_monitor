@@ -22,6 +22,7 @@ class ArtifactorySpider(scrapy.Spider):
 
         item['date'] = None
         item['notes'] = None
+        item['category'] = 'develop'
         item['id'] = 'artifactory_oss'
         item[
             'download_url'] = 'https://releases.jfrog.io/artifactory/artifactory-debs/pool/jfrog-artifactory-oss/jfrog-artifactory-oss-[RELEASE].deb'

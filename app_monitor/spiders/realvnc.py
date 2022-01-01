@@ -22,6 +22,7 @@ class RealvncSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = app_id
         item['download_url'] = down_url
+        item['category'] = 'tool'
         return item
 
     def parse(self, response, **kwargs):

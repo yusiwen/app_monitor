@@ -14,6 +14,7 @@ class WiresharkSpider(scrapy.Spider):
 
         item = AppMonitorItem()
         item['name'] = 'Wireshark'
+        item['category'] = 'tool'
         item['version'] = version
 
         item['date'] = None

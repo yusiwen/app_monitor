@@ -21,6 +21,7 @@ class FilezillaSpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = ''
         item['id'] = 'filezilla'
+        item['category'] = 'tool'
         item['download_url'] = down_urls
         return item
         pass

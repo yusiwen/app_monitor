@@ -38,4 +38,5 @@ class NirsoftSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = app_id
         item['download_url'] = down_urls
+        item['category'] = 'tool'
         return item

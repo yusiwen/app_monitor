@@ -21,6 +21,7 @@ class ApacheSpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-maven'
+        item['category'] = 'develop'
         item['download_url'] = response.xpath(
             '//main/section/section/table//a[contains(text(),"bin.zip")]/@href').get()
         return item
@@ -34,6 +35,7 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-tomcat' + str_ver_no
 
         down_urls = []
@@ -55,6 +57,7 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = core_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-runtime'
         item['download_url'] = response.xpath(
             '//main//h3[contains(text(), "Karaf Runtime")]//following-sibling::p[contains(text(), "Binary Distribution")]/a[contains(text(), "zip")]/@href').get()
@@ -67,6 +70,7 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = cellar_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-cellar'
         item['download_url'] = 'http://karaf.apache.org/download.html#cellar-installation'
         yield item
@@ -78,6 +82,7 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = cave_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-cave'
         item['download_url'] = 'http://karaf.apache.org/download.html#cave-installation'
         yield item
@@ -89,6 +94,7 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = decanter_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-decanter'
         item['download_url'] = 'http://karaf.apache.org/download.html#decanter-installation'
         yield item
@@ -105,6 +111,7 @@ class ApacheSpider(scrapy.Spider):
         item['notes'] = 'Changelog: ' + response.xpath(base_path +
                                                        '/following-sibling::td[1]/a/@href').get()
         item['id'] = 'apache-felix'
+        item['category'] = 'develop'
         item['download_url'] = response.xpath(base_path +
                                               '/following-sibling::td[2]/a[contains(text(), "zip")]/@href').get()
         return item
