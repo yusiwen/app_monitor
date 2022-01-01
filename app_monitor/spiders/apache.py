@@ -38,13 +38,13 @@ class ApacheSpider(scrapy.Spider):
         item['category'] = 'develop'
         item['id'] = 'apache-tomcat' + str_ver_no
 
-        down_urls = []
-        down_urls.append(response.xpath(
-            '//main//div[@id="content"]//li[contains(text(), "Core")]/ul/li/a[text()[re:test(., "^zip$")]]/@href').get())
-        down_urls.append(response.xpath(
-            '//main//div[@id="content"]//li[contains(text(), "documentation")]/ul/li/a/@href').get())
-        down_urls.append(response.xpath(
-            '//main//div[@id="content"]//li[contains(text(), "Deployer")]/ul/li/a[text()[re:test(., "^zip$")]]/@href').get())
+        down_urls = [response.xpath(
+            '//main//div[@id="content"]//li[contains(text(), "Core")]/ul/li/a[text()[re:test(., "^zip$")]]/@href').get(),
+                     response.xpath(
+                         '//main//div[@id="content"]//li[contains(text(), "documentation")]/ul/li/a/@href').get(),
+                     response.xpath(
+                         '//main//div[@id="content"]//li[contains(text(), "Deployer")]/ul/li/a[text()[re:test(., '
+                         '"^zip$")]]/@href').get()]
         item['download_url'] = down_urls
         return item
 
@@ -60,7 +60,8 @@ class ApacheSpider(scrapy.Spider):
         item['category'] = 'develop'
         item['id'] = 'apache-karaf-runtime'
         item['download_url'] = response.xpath(
-            '//main//h3[contains(text(), "Karaf Runtime")]//following-sibling::p[contains(text(), "Binary Distribution")]/a[contains(text(), "zip")]/@href').get()
+            '//main//h3[contains(text(), "Karaf Runtime")]//following-sibling::p[contains(text(), '
+            '"Binary Distribution")]/a[contains(text(), "zip")]/@href').get()
         yield item
 
         cellar_version = response.xpath(
@@ -100,7 +101,8 @@ class ApacheSpider(scrapy.Spider):
         yield item
 
     def _parse_felix(self, response):
-        base_path = '//div[@class="main"]//table[@class="table"]/tbody/tr/td[contains(text(), "Felix Framework Distribution")]'
+        base_path = '//div[@class="main"]//table[@class="table"]/tbody/tr/td[contains(text(), "Felix Framework ' \
+                    'Distribution")] '
         version = response.xpath(
             base_path + '/following-sibling::td[1]/text()').get().split(' ')[0]
 

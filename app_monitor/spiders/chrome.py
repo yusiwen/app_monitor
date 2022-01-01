@@ -28,7 +28,8 @@ class ChromeSpider(scrapy.Spider):
         item['version'] = version
         item['date'] = datestr
         item[
-            'notes'] = '<a href="https://chromium.googlesource.com/chromium/src/+log/{}..{}?pretty=fuller&n=10000">Changelog</a>'.format(
+            'notes'] = '<a href="https://chromium.googlesource.com/chromium/src/+log/{}..{' \
+                       '}?pretty=fuller&n=10000">Changelog</a>'.format(
             previous_version, version)
         item['id'] = 'chrome'
         item['category'] = 'tool'

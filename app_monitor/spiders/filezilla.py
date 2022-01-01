@@ -10,10 +10,9 @@ class FilezillaSpider(scrapy.Spider):
 
     def parse(self, response, **kwargs):
         version = response.xpath('//p[contains(text(), "latest stable version")]/text()').get().split(' ')[-1]
-        down_urls = []
-        down_urls.append(response.xpath('//a[contains(text(), "win64.zip")]/@href').get())
-        down_urls.append(response.xpath('//a[contains(text(), "macosx-x86.app.tar.bz2")]/@href').get())
-        down_urls.append(response.xpath('//a[contains(text(), "x86_64-linux-gnu.tar.bz2")]/@href').get())
+        down_urls = [response.xpath('//a[contains(text(), "win64.zip")]/@href').get(),
+                     response.xpath('//a[contains(text(), "macosx-x86.app.tar.bz2")]/@href').get(),
+                     response.xpath('//a[contains(text(), "x86_64-linux-gnu.tar.bz2")]/@href').get()]
 
         item = AppMonitorItem()
         item['name'] = 'FileZilla'

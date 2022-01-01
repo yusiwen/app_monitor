@@ -17,9 +17,11 @@ def _init_elasticsearch():
         port=settings.ES_PORT)
     return es
 
+
 def _genid(app_id, category):
     s = app_id + category
     return hashlib.sha1(s.encode()).hexdigest()
+
 
 def get(app_id, category):
     id = _genid(app_id, category)

@@ -10,9 +10,8 @@ class AllwaysyncSpider(scrapy.Spider):
 
     def parse(self, response, **kwargs):
         version = response.xpath('//section//div[@class="panel-body"]/p/strong/text()').get()
-        down_urls = []
-        down_urls.append(response.xpath('//a[@id="desktop-download-primary"]/@href').get())
-        down_urls.append(response.xpath('//a[@id="desktop-download-secondary"]/@href').get())
+        down_urls = [response.xpath('//a[@id="desktop-download-primary"]/@href').get(),
+                     response.xpath('//a[@id="desktop-download-secondary"]/@href').get()]
 
         item = AppMonitorItem()
         item['name'] = 'Allway Sync'
