@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy import Request
 
 from app_monitor import settings
 from app_monitor.items import AppMonitorItem
@@ -8,101 +9,83 @@ from app_monitor.items import AppMonitorItem
 class GithubSpider(scrapy.Spider):
     name = 'github'
     allowed_domains = ['api.github.com']
-    start_urls = [
-        'https://api.github.com/repos/adoptium/temurin8-binaries/releases/latest',
-        'https://api.github.com/repos/adoptium/temurin11-binaries/releases/latest',
-        'https://api.github.com/repos/adoptium/temurin17-binaries/releases/latest',
-        'https://api.github.com/repos/Alexey-T/CudaText/releases/latest',
-        'https://api.github.com/repos/alibaba/arthas/releases/latest',
-        'https://api.github.com/repos/alibaba/Sentinel/releases/latest',
-        'https://api.github.com/repos/audacity/audacity/releases/latest',
-        'https://api.github.com/repos/beekeeper-studio/beekeeper-studio/releases/latest',
-        'https://api.github.com/repos/Dreamacro/clash/releases/latest',
-        'https://api.github.com/repos/Eugeny/tabby/releases/latest',
-        'https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest',
-        'https://api.github.com/repos/Requarks/wiki/releases/latest',
-        'https://api.github.com/repos/alibaba/nacos/releases/latest',
-        'https://api.github.com/repos/ankitects/anki/releases/latest',
-        'https://api.github.com/repos/be5invis/Iosevka/releases/latest',
-        'https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest',
-        'https://api.github.com/repos/cdr/code-server/releases/latest',
-        'https://api.github.com/repos/cmderdev/cmder/releases/latest',
-        'https://api.github.com/repos/dbeaver/dbeaver/releases/latest',
-        'https://api.github.com/repos/elastic/elasticsearch/releases/latest',
-        'https://api.github.com/repos/elastic/kibana/releases/latest',
-        'https://api.github.com/repos/elastic/logstash/releases/latest',
-        'https://api.github.com/repos/FredrikNoren/ungit/releases/latest',
-        'https://api.github.com/repos/git-for-windows/git/releases/latest',
-        'https://api.github.com/repos/gitahead/gitahead/releases/latest',
-        'https://api.github.com/repos/gitextensions/gitextensions/releases/latest',
-        'https://api.github.com/repos/go-gitea/gitea/releases/latest',
-        'https://api.github.com/repos/goharbor/harbor/releases/latest',
-        'https://api.github.com/repos/graalvm/graalvm-ce-builds/releases/latest',
-        'https://api.github.com/repos/gradle/gradle/releases/latest',
-        'https://api.github.com/repos/grafana/grafana/releases/latest',
-        'https://api.github.com/repos/harness/drone/releases/latest',
-        'https://api.github.com/repos/hashicorp/consul/releases/latest',
-        'https://api.github.com/repos/HeidiSQL/HeidiSQL/releases/latest',
-        'https://api.github.com/repos/janeczku/calibre-web/releases/latest',
-        'https://api.github.com/repos/jenkinsci/jenkins/releases/latest',
-        'https://api.github.com/repos/keeweb/keeweb/releases/latest',
-        'https://api.github.com/repos/koalaman/shellcheck/releases/latest',
-        'https://api.github.com/repos/kubeedge/kubeedge/releases/latest',
-        'https://api.github.com/repos/kubernetes-sigs/kind/releases/latest',
-        'https://api.github.com/repos/kubernetes/kubernetes/releases/latest',
-        'https://api.github.com/repos/kubernetes/minikube/releases/latest',
-        'https://api.github.com/repos/laurent22/joplin/releases/latest',
-        'https://api.github.com/repos/lxgw/LxgwWenKai/releases/latest',
-        'https://api.github.com/repos/medcl/elasticsearch-analysis-ik/releases/latest',
-        'https://api.github.com/repos/microsoft/cascadia-code/releases/latest',
-        'https://api.github.com/repos/microsoft/vscode/releases/latest',
-        'https://api.github.com/repos/minio/minio/releases/latest',
-        'https://api.github.com/repos/prometheus/node_exporter/releases/latest',
-        'https://api.github.com/repos/prometheus/prometheus/releases/latest',
-        'https://api.github.com/repos/prometheus/pushgateway/releases/latest',
-        'https://api.github.com/repos/qishibo/AnotherRedisDesktopManager/releases/latest',
-        'https://api.github.com/repos/redis/redis/releases/latest',
-        'https://api.github.com/repos/rust-lang/rust/releases/latest',
-        'https://api.github.com/repos/shadowsocks/ShadowsocksX-NG/releases/latest',
-        'https://api.github.com/repos/shadowsocks/shadowsocks-windows/releases/latest',
-        'https://api.github.com/repos/tmux/tmux/releases/latest',
-        'https://api.github.com/repos/visualfc/liteide/releases/latest',
-        'https://api.github.com/repos/zealdocs/zeal/releases/latest'
+    template_url = 'https://api.github.com/repos/{repo_name}/releases/latest'
+    repos = [
+        ['adoptium/temurin8-binaries', 'develop'],
+        ['adoptium/temurin11-binaries', 'develop'],
+        ['adoptium/temurin17-binaries', 'develop'],
+        ['Alexey-T/CudaText', 'tool'],
+        ['alibaba/arthas', 'develop'],
+        ['alibaba/Sentinel', 'develop'],
+        ['audacity/audacity', 'tool'],
+        ['beekeeper-studio/beekeeper-studio', 'develop'],
+        ['Dreamacro/clash', 'tool'],
+        ['Eugeny/tabby', 'tool'],
+        ['Fndroid/clash_for_windows_pkg', 'tool'],
+        ['Requarks/wiki', 'tool'],
+        ['alibaba/nacos', 'develop'],
+        ['ankitects/anki', 'tool'],
+        ['be5invis/Iosevka', 'font'],
+        ['be5invis/Sarasa-Gothic', 'font'],
+        ['cdr/code-server', 'develop'],
+        ['cmderdev/cmder', 'tool'],
+        ['dbeaver/dbeaver', 'develop'],
+        ['elastic/elasticsearch', 'develop'],
+        ['elastic/kibana', 'develop'],
+        ['elastic/logstash', 'develop'],
+        ['FredrikNoren/ungit', 'develop'],
+        ['git-for-windows/git', 'develop'],
+        ['gitahead/gitahead', 'develop'],
+        ['gitextensions/gitextensions', 'develop'],
+        ['go-gitea/gitea', 'develop'],
+        ['goharbor/harbor', 'develop'],
+        ['graalvm/graalvm-ce-builds', 'develop'],
+        ['gradle/gradle', 'develop'],
+        ['grafana/grafana', 'develop'],
+        ['harness/drone', 'develop'],
+        ['hashicorp/consul', 'develop'],
+        ['HeidiSQL/HeidiSQL', 'develop'],
+        ['janeczku/calibre-web', 'tool'],
+        ['jenkinsci/jenkins', 'develop'],
+        ['keeweb/keeweb', 'tool'],
+        ['koalaman/shellcheck', 'tool'],
+        ['kubeedge/kubeedge', 'develop'],
+        ['kubernetes-sigs/kind', 'develop'],
+        ['kubernetes/kubernetes', 'develop'],
+        ['kubernetes/minikube', 'develop'],
+        ['laurent22/joplin', 'tool'],
+        ['lxgw/LxgwWenKai', 'font'],
+        ['medcl/elasticsearch-analysis-ik', 'develop'],
+        ['microsoft/cascadia-code', 'font'],
+        ['microsoft/vscode', 'develop'],
+        ['minio/minio', 'develop'],
+        ['prometheus/node_exporter', 'develop'],
+        ['prometheus/prometheus', 'develop'],
+        ['prometheus/pushgateway', 'develop'],
+        ['qishibo/AnotherRedisDesktopManager', 'develop'],
+        ['redis/redis', 'develop'],
+        ['rust-lang/rust', 'develop'],
+        ['shadowsocks/ShadowsocksX-NG', 'tool'],
+        ['shadowsocks/shadowsocks-windows', 'tool'],
+        ['tmux/tmux', 'tool'],
+        ['visualfc/liteide', 'develop'],
+        ['zealdocs/zeal' 'tool'],
     ]
     http_user = settings.GITHUB_USER
     http_pass = settings.GITHUB_ACCESS_TOKEN
 
-    def _parse_assets(self, app_id, version, **data):
-        filtered = data['assets']
-        output = []
-        if app_id == 'gitea':
-            output = [x for x in filtered if x['name'] ==
-                      'gitea-' + version[1:] + '-linux-amd64']
-        elif app_id == 'keeweb':
-            o1 = [x for x in filtered if x['name'] ==
-                  'KeeWeb-' + version[1:] + '.win.x64.zip']
-            o2 = [x for x in filtered if x['name'] ==
-                  'KeeWeb-' + version[1:] + '.linux.x64.deb']
-            o3 = [x for x in filtered if x['name'] ==
-                  'KeeWeb-' + version[1:] + '.mac.dmg']
-            output = o1 + o2 + o3
-        elif app_id == 'git':
-            output = [x for x in filtered if x['name']
-                      == 'Git-' + version + '-64-bit.exe']
-
-        if len(output) == 1:
-            return output[0]['browser_download_url']
-        elif len(output) > 1:
-            urls = []
-            for o in output:
-                urls.append(o['browser_download_url'])
-            return urls
-        else:
-            return ''
+    def start_requests(self):
+        for repo in self.repos:
+            url = self.template_url.format(repo_name=repo[0])
+            print(url)
+            yield Request(
+                url,
+                cb_kwargs={'repo': repo[0], 'category': repo[1]}
+            )
 
     def parse(self, response, **kwargs):
         json_dict = response.json()
-        app_id = json_dict['url'].rsplit('/', 3)[-3]
+        app_id = kwargs['repo']
         version = json_dict['tag_name']
         date = json_dict['created_at']
 
@@ -112,6 +95,6 @@ class GithubSpider(scrapy.Spider):
         item['date'] = date
         item['notes'] = ''
         item['id'] = app_id
-        item['category'] = 'github'
+        item['category'] = kwargs['category']
         item['download_url'] = json_dict['html_url']
         return item
