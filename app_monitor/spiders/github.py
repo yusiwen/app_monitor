@@ -101,8 +101,8 @@ class GithubSpider(scrapy.Spider):
             return ''
 
     def parse(self, response, **kwargs):
-        app_id = response.request.url.rsplit('/', 3)[-3]
         json_dict = response.json()
+        app_id = json_dict['url'].rsplit('/', 3)[-3]
         version = json_dict['tag_name']
         date = json_dict['created_at']
 
