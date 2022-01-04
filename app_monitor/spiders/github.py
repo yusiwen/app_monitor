@@ -59,6 +59,7 @@ class GithubSpider(scrapy.Spider):
         ['microsoft/cascadia-code', 'font'],
         ['microsoft/vscode', 'develop'],
         ['minio/minio', 'develop'],
+        ['PowerShell/Win32-OpenSSH', 'tool'],
         ['prometheus/node_exporter', 'develop'],
         ['prometheus/prometheus', 'develop'],
         ['prometheus/pushgateway', 'develop'],
