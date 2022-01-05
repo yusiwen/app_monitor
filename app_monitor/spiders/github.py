@@ -69,6 +69,7 @@ class GithubSpider(scrapy.Spider):
         ['shadowsocks/ShadowsocksX-NG', 'tool'],
         ['shadowsocks/shadowsocks-windows', 'tool'],
         ['tmux/tmux', 'tool'],
+        ['tonsky/FiraCode', 'font'],
         ['visualfc/liteide', 'develop'],
         ['zealdocs/zeal' 'tool'],
     ]
