@@ -23,6 +23,7 @@ class GithubSpider(scrapy.Spider):
         ['Eugeny/tabby', 'tool'],
         ['Fndroid/clash_for_windows_pkg', 'tool'],
         ['Requarks/wiki', 'tool'],
+        ['alibaba/jetcache', 'develop'],
         ['alibaba/nacos', 'develop'],
         ['ankitects/anki', 'tool'],
         ['be5invis/Iosevka', 'font'],
