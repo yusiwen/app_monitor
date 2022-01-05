@@ -24,12 +24,14 @@ class ChromeSpider(scrapy.Spider):
         previous_version = '{previous_version}'.format(**output[0])
 
         item = AppMonitorItem()
-        item['name'] = 'google-chrome-browser'
+        item['name'] = 'Chrome'
         item['version'] = version
         item['date'] = datestr
         item[
-            'notes'] = '<a href="https://chromium.googlesource.com/chromium/src/+log/{}..{}?pretty=fuller&n=10000">Changelog</a>'.format(
+            'notes'] = '<a href="https://chromium.googlesource.com/chromium/src/+log/{}..{' \
+                       '}?pretty=fuller&n=10000">Changelog</a>'.format(
             previous_version, version)
         item['id'] = 'chrome'
+        item['category'] = 'tool'
         item['download_url'] = 'https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1'
         return item

@@ -21,6 +21,7 @@ class ApacheSpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = ''
         item['id'] = 'apache-maven'
+        item['category'] = 'develop'
         item['download_url'] = response.xpath(
             '//main/section/section/table//a[contains(text(),"bin.zip")]/@href').get()
         return item
@@ -34,15 +35,16 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-tomcat' + str_ver_no
 
-        down_urls = []
-        down_urls.append(response.xpath(
-            '//main//div[@id="content"]//li[contains(text(), "Core")]/ul/li/a[text()[re:test(., "^zip$")]]/@href').get())
-        down_urls.append(response.xpath(
-            '//main//div[@id="content"]//li[contains(text(), "documentation")]/ul/li/a/@href').get())
-        down_urls.append(response.xpath(
-            '//main//div[@id="content"]//li[contains(text(), "Deployer")]/ul/li/a[text()[re:test(., "^zip$")]]/@href').get())
+        down_urls = [response.xpath(
+            '//main//div[@id="content"]//li[contains(text(), "Core")]/ul/li/a[text()[re:test(., "^zip$")]]/@href').get(),
+                     response.xpath(
+                         '//main//div[@id="content"]//li[contains(text(), "documentation")]/ul/li/a/@href').get(),
+                     response.xpath(
+                         '//main//div[@id="content"]//li[contains(text(), "Deployer")]/ul/li/a[text()[re:test(., '
+                         '"^zip$")]]/@href').get()]
         item['download_url'] = down_urls
         return item
 
@@ -55,9 +57,11 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = core_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-runtime'
         item['download_url'] = response.xpath(
-            '//main//h3[contains(text(), "Karaf Runtime")]//following-sibling::p[contains(text(), "Binary Distribution")]/a[contains(text(), "zip")]/@href').get()
+            '//main//h3[contains(text(), "Karaf Runtime")]//following-sibling::p[contains(text(), '
+            '"Binary Distribution")]/a[contains(text(), "zip")]/@href').get()
         yield item
 
         cellar_version = response.xpath(
@@ -67,6 +71,7 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = cellar_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-cellar'
         item['download_url'] = 'http://karaf.apache.org/download.html#cellar-installation'
         yield item
@@ -78,6 +83,7 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = cave_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-cave'
         item['download_url'] = 'http://karaf.apache.org/download.html#cave-installation'
         yield item
@@ -89,12 +95,14 @@ class ApacheSpider(scrapy.Spider):
         item['version'] = decanter_version
         item['date'] = None
         item['notes'] = ''
+        item['category'] = 'develop'
         item['id'] = 'apache-karaf-decanter'
         item['download_url'] = 'http://karaf.apache.org/download.html#decanter-installation'
         yield item
 
     def _parse_felix(self, response):
-        base_path = '//div[@class="main"]//table[@class="table"]/tbody/tr/td[contains(text(), "Felix Framework Distribution")]'
+        base_path = '//div[@class="main"]//table[@class="table"]/tbody/tr/td[contains(text(), "Felix Framework ' \
+                    'Distribution")] '
         version = response.xpath(
             base_path + '/following-sibling::td[1]/text()').get().split(' ')[0]
 
@@ -105,6 +113,7 @@ class ApacheSpider(scrapy.Spider):
         item['notes'] = 'Changelog: ' + response.xpath(base_path +
                                                        '/following-sibling::td[1]/a/@href').get()
         item['id'] = 'apache-felix'
+        item['category'] = 'develop'
         item['download_url'] = response.xpath(base_path +
                                               '/following-sibling::td[2]/a[contains(text(), "zip")]/@href').get()
         return item

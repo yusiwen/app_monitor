@@ -1,3 +1,4 @@
+import hashlib
 import json
 import logging
 
@@ -17,7 +18,13 @@ def _init_elasticsearch():
     return es
 
 
-def get(app_id):
+def _genid(app_id, category):
+    s = app_id + category
+    return hashlib.sha1(s.encode()).hexdigest()
+
+
+def get(app_id, category):
+    id = _genid(app_id, category)
     # check index if it exists
     es = _init_elasticsearch()
     if not es.indices.exists(index=settings.ES_INDEX):
@@ -27,7 +34,7 @@ def get(app_id):
         # get document by _id
         doc = es.get(index=settings.ES_INDEX,
                      doc_type=settings.ES_TYPE,
-                     id=app_id)
+                     id=id)
         return doc
     except NotFoundError:
         return None
@@ -46,7 +53,7 @@ def add(item):
         result = es.index(
             index=settings.ES_INDEX,
             doc_type=settings.ES_TYPE,
-            id=item['id'],
+            id=_genid(item['id'], item['category']),
             body=_get_data(item))
         if not result:
             logging.error('ERROR: Elasticsearch add document error')
@@ -59,8 +66,7 @@ def update(item):
     try:
         result = es.update(
             index=settings.ES_INDEX,
-            doc_type=settings.ES_TYPE,
-            id=item['id'],
+            id=_genid(item['id'], item['category']),
             body='{"doc":' + _get_data(item) + '}')
         if not result:
             logging.error('ERROR: Elasticsearch update document error')

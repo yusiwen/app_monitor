@@ -19,6 +19,7 @@ class RubySpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = None
         item['id'] = 'ruby'
+        item['category'] = 'develop'
         item['download_url'] = url
 
         return item

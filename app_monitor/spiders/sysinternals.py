@@ -15,7 +15,6 @@ class SysinternalsSpider(scrapy.Spider):
         'https://docs.microsoft.com/zh-cn/sysinternals/downloads/vmmap',
         'https://docs.microsoft.com/zh-cn/sysinternals/downloads/rammap',
         'https://docs.microsoft.com/zh-cn/sysinternals/downloads/sdelete'
-
     ]
 
     def parse(self, response, **kwargs):
@@ -33,4 +32,5 @@ class SysinternalsSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = app_id
         item['download_url'] = down_url
+        item['category'] = 'tool'
         return item

@@ -17,10 +17,10 @@ class VirtualboxSpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = ''
         item['id'] = 'virtualbox'
+        item['category'] = 'tool'
 
-        urls = []
-        urls.append(response.xpath('//a[@class="ext-link"][contains(text(), "Windows hosts")]/@href').get())
-        urls.append(response.xpath('//a[@class="ext-link"][contains(text(), "OS X hosts")]/@href').get())
-        urls.append('https://www.virtualbox.org/wiki/Linux_Downloads')
+        urls = [response.xpath('//a[@class="ext-link"][contains(text(), "Windows hosts")]/@href').get(),
+                response.xpath('//a[@class="ext-link"][contains(text(), "OS X hosts")]/@href').get(),
+                'https://www.virtualbox.org/wiki/Linux_Downloads']
         item['download_url'] = urls
         return item

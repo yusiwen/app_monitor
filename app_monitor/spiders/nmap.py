@@ -20,5 +20,6 @@ class NmapSpider(scrapy.Spider):
         item['notes'] = None
         item['id'] = 'nmap'
         item['download_url'] = url
+        item['category'] = 'tool'
 
         return item

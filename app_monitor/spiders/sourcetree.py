@@ -23,16 +23,17 @@ class SourcetreeSpider(scrapy.Spider):
                 '/')[-1].replace('.zip', '').replace('Sourcetree_', '')
 
         item = AppMonitorItem()
-        item['name'] = 'SourceTree ' + tag
+        item['name'] = 'SourceTree (' + tag + ')'
         item['version'] = version
         item['date'] = None
         item['notes'] = ''
         item['id'] = app_id
+        item['category'] = 'develop'
         item['download_url'] = dwn_url
         yield item
 
     def parse(self, response, **kwargs):
         for item in self._parse_item('sourcetree-mac', 'Mac', response):
             yield item
-        for item in self._parse_item('sourcetree-win', 'Windows', response):
+        for item in self._parse_item('sourcetree-win', 'Win', response):
             yield item

@@ -38,6 +38,7 @@ class CalibreSpider(scrapy.Spider):
             '(//div[@id="content"]//h2)[1]/following-sibling::ul').extract())
         item['notes'] = notes
         item['id'] = 'calibre'
+        item['category'] = 'tool'
 
         down_urls = []
         ver = self._check_version(version)

@@ -19,12 +19,12 @@ class NodeSpider(scrapy.Spider):
         item['date'] = None
         item['notes'] = None
         item['id'] = 'node-lts'
+        item['category'] = 'develop'
 
-        down_urls = []
-        down_urls.append('https://nodejs.org/dist/v' + version + '/node-v' + version + '-x64.msi')
-        down_urls.append('https://nodejs.org/dist/v' + version + '/node-v' + version + '.pkg')
-        down_urls.append('https://nodejs.org/dist/v' + version + '/node-v' + version + '-linux-x64.tar.xz')
-        down_urls.append('https://nodejs.org/dist/v' + version + '/node-v' + version + '-linux-arm64.tar.xz')
+        down_urls = ['https://nodejs.org/dist/v' + version + '/node-v' + version + '-x64.msi',
+                     'https://nodejs.org/dist/v' + version + '/node-v' + version + '.pkg',
+                     'https://nodejs.org/dist/v' + version + '/node-v' + version + '-linux-x64.tar.xz',
+                     'https://nodejs.org/dist/v' + version + '/node-v' + version + '-linux-arm64.tar.xz']
         item['download_url'] = down_urls
 
         return item
