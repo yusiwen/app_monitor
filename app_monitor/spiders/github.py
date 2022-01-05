@@ -11,6 +11,7 @@ class GithubSpider(scrapy.Spider):
     allowed_domains = ['api.github.com']
     template_url = 'https://api.github.com/repos/{repo_name}/releases/latest'
     repos = [
+        ['adobe-fonts/source-han-sans', 'font'],
         ['adoptium/temurin8-binaries', 'develop'],
         ['adoptium/temurin11-binaries', 'develop'],
         ['adoptium/temurin17-binaries', 'develop'],
