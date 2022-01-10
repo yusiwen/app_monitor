@@ -18,6 +18,7 @@ class VirtualboxSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = 'virtualbox'
         item['category'] = 'tool'
+        item['tags'] = ['virtualization']
 
         urls = [response.xpath('//a[@class="ext-link"][contains(text(), "Windows hosts")]/@href').get(),
                 response.xpath('//a[@class="ext-link"][contains(text(), "OS X hosts")]/@href').get(),

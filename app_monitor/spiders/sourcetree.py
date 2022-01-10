@@ -29,6 +29,7 @@ class SourcetreeSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = app_id
         item['category'] = 'develop'
+        item['tags'] = ['git', 'vcs']
         item['download_url'] = dwn_url
         yield item
 

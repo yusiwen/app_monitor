@@ -23,6 +23,8 @@ class RealvncSpider(scrapy.Spider):
         item['id'] = app_id
         item['download_url'] = down_url
         item['category'] = 'tool'
+        item['tags'] = ['vnc', 'network']
+
         return item
 
     def parse(self, response, **kwargs):

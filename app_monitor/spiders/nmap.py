@@ -21,5 +21,7 @@ class NmapSpider(scrapy.Spider):
         item['id'] = 'nmap'
         item['download_url'] = url
         item['category'] = 'tool'
+        item['tags'] = ['network', 'nmap']
+
 
         return item

@@ -33,5 +33,6 @@ class ChromeSpider(scrapy.Spider):
             previous_version, version)
         item['id'] = 'chrome'
         item['category'] = 'tool'
+        item['tags'] = ['browser', 'chrome']
         item['download_url'] = 'https://www.google.com/intl/en/chrome/browser/desktop/index.html?standalone=1'
         return item

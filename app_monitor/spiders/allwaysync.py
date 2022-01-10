@@ -20,5 +20,6 @@ class AllwaysyncSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = 'allwaysync'
         item['category'] = 'tool'
+        item['tags'] = ['sync']
         item['download_url'] = down_urls
         return item

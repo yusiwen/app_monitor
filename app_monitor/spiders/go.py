@@ -28,5 +28,6 @@ class GoSpider(scrapy.Spider):
         item['notes'] = ''
         item['id'] = 'go'
         item['category'] = 'develop'
+        item['tags'] = ['go', 'runtime', 'sdk']
         item['download_url'] = down_urls
         return item

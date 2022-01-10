@@ -39,6 +39,7 @@ class CalibreSpider(scrapy.Spider):
         item['notes'] = notes
         item['id'] = 'calibre'
         item['category'] = 'tool'
+        item['tags'] = ['reading', 'book']
 
         down_urls = []
         ver = self._check_version(version)

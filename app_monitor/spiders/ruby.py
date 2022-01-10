@@ -20,6 +20,7 @@ class RubySpider(scrapy.Spider):
         item['notes'] = None
         item['id'] = 'ruby'
         item['category'] = 'develop'
+        item['tags'] = ['ruby', 'sdk']
         item['download_url'] = url
 
         return item
