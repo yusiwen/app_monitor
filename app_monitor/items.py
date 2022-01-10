@@ -16,6 +16,7 @@ class AppMonitorItem(scrapy.Item):
     notes = scrapy.Field()
     download_url = scrapy.Field()
     category = scrapy.Field()
+    tags = scrapy.Field()
     last_check_time = scrapy.Field()
     last_check_status = scrapy.Field()
     last_check_exception = scrapy.Field()
