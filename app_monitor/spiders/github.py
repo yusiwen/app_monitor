@@ -11,7 +11,7 @@ class GithubSpider(scrapy.Spider):
     allowed_domains = ['api.github.com']
     template_url = 'https://api.github.com/repos/{repo_name}/releases/latest'
     repos = [
-        {'repo': 'adobe-fonts/source-han-sans', 'category': 'font'},
+        {'repo': 'adobe-fonts/source-han-sans', 'category': 'font', 'tags': ['font']},
         {'repo': 'adoptium/temurin8-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk8']},
         {'repo': 'adoptium/temurin11-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk11']},
         {'repo': 'adoptium/temurin17-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk17']},
@@ -28,8 +28,8 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'alibaba/nacos', 'category': 'develop', 'tags': ['java', 'service discovery',
                                                                   'configuration management', 'microservice']},
         {'repo': 'ankitects/anki', 'category': 'tool', 'tags': ['notetaking']},
-        {'repo': 'be5invis/Iosevka', 'category': 'font'},
-        {'repo': 'be5invis/Sarasa-Gothic', 'category': 'font'},
+        {'repo': 'be5invis/Iosevka', 'category': 'font', 'tags': ['font']},
+        {'repo': 'be5invis/Sarasa-Gothic', 'category': 'font', 'tags': ['font']},
         {'repo': 'cdr/code-server', 'category': 'tool', 'tags': ['vps', 'ide']},
         {'repo': 'cmderdev/cmder', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'dbeaver/dbeaver', 'category': 'develop', 'tags': ['database']},
@@ -58,9 +58,9 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'kubernetes/kubernetes', 'category': 'develop', 'tags': ['cloud computing', 'kubernetes']},
         {'repo': 'kubernetes/minikube', 'category': 'develop', 'tags': ['cloud computing', 'kubernetes']},
         {'repo': 'laurent22/joplin', 'category': 'tool', 'tags': ['notetaking']},
-        {'repo': 'lxgw/LxgwWenKai', 'category': 'font'},
+        {'repo': 'lxgw/LxgwWenKai', 'category': 'font', 'tags': ['font']},
         {'repo': 'medcl/elasticsearch-analysis-ik', 'category': 'develop', 'tags': ['middleware', 'plugin']},
-        {'repo': 'microsoft/cascadia-code', 'category': 'font'},
+        {'repo': 'microsoft/cascadia-code', 'category': 'font', 'tags': ['font']},
         {'repo': 'microsoft/vscode', 'category': 'tool', 'tags': ['ide']},
         {'repo': 'minio/minio', 'category': 'tool', 'tags': ['vps', 'oss']},
         {'repo': 'nvm-sh/nvm', 'category': 'tool', 'tags': ['nodejs']},
@@ -74,7 +74,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'shadowsocks/ShadowsocksX-NG', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'shadowsocks/shadowsocks-windows', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'tmux/tmux', 'category': 'tool', 'tags': ['terminal']},
-        {'repo': 'tonsky/FiraCode', 'category': 'font'},
+        {'repo': 'tonsky/FiraCode', 'category': 'font', 'tags': ['font']},
         {'repo': 'visualfc/liteide', 'category': 'develop', 'tags': ['go', 'ide']},
         {'repo': 'zealdocs/zeal', 'category': 'tool', 'tags': ['reference', 'document', 'reading']},
     ]
