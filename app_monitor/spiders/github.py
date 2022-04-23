@@ -15,6 +15,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'adoptium/temurin8-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk8']},
         {'repo': 'adoptium/temurin11-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk11']},
         {'repo': 'adoptium/temurin17-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk17']},
+        {'repo': 'adoptium/temurin18-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk18']},
         {'repo': 'Alexey-T/CudaText', 'category': 'tool', 'tags': ['editor']},
         {'repo': 'alibaba/arthas', 'category': 'develop', 'tags': ['java', 'debug', 'diagnostic']},
         {'repo': 'alibaba/Sentinel', 'category': 'develop', 'tags': ['java', 'flow control', 'microservice']},
