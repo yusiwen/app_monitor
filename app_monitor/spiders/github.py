@@ -37,6 +37,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'elastic/elasticsearch', 'category': 'develop', 'tags': ['middleware']},
         {'repo': 'elastic/kibana', 'category': 'develop', 'tags': ['middleware']},
         {'repo': 'elastic/logstash', 'category': 'develop', 'tags': ['middleware',]},
+        {'repo': 'flannel-io/flannel', 'category': 'develop', 'tags': ['k8s','cni']},
         {'repo': 'FredrikNoren/ungit', 'category': 'develop', 'tags': ['git', 'vcs']},
         {'repo': 'git-for-windows/git', 'category': 'develop', 'tags': ['git', 'vcs']},
         {'repo': 'gitahead/gitahead', 'category': 'develop', 'tags': ['git', 'vcs']},
@@ -62,6 +63,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'laurent22/joplin', 'category': 'tool', 'tags': ['notetaking']},
         {'repo': 'lxgw/LxgwWenKai', 'category': 'font', 'tags': ['font']},
         {'repo': 'medcl/elasticsearch-analysis-ik', 'category': 'develop', 'tags': ['middleware', 'plugin']},
+        {'repo': 'metallb/metallb', 'category': 'develop', 'tags': ['k8s', 'lb']},
         {'repo': 'microsoft/cascadia-code', 'category': 'font', 'tags': ['font']},
         {'repo': 'microsoft/vscode', 'category': 'tool', 'tags': ['ide']},
         {'repo': 'minio/minio', 'category': 'tool', 'tags': ['vps', 'oss']},
@@ -77,6 +79,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'shadowsocks/shadowsocks-windows', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'tmux/tmux', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'tonsky/FiraCode', 'category': 'font', 'tags': ['font']},
+        {'repo': 'traefik/traefik', 'category': 'develop', 'tags': ['k8s', 'cloud native', 'gateway']},
         {'repo': 'visualfc/liteide', 'category': 'develop', 'tags': ['go', 'ide']},
         {'repo': 'zealdocs/zeal', 'category': 'tool', 'tags': ['reference', 'document', 'reading']},
     ]
