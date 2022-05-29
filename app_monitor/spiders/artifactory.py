@@ -6,14 +6,15 @@ from packaging import version as v
 
 class ArtifactorySpider(scrapy.Spider):
     name = 'artifactory'
-    allowed_domains = ['releases.jfrog.io']
+    allowed_domains = ['releases-docker.jfrog.io']
     start_urls = [
-        'https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/oss/jfrog-artifactory-oss/']
+        'https://releases-docker.jfrog.io/artifactory/docker/jfrog/artifactory-oss/']
 
     def parse(self, response, **kwargs):
-        vers = response.xpath('/html/body/pre[2]/a/text()').getall()
-        for n, e in enumerate(vers):
-            vers[n] = v.parse(e.split('/')[0])
+        vers = list(filter(lambda s: s[0:1].isnumeric(),
+                           list(map(lambda s: s.replace('/', ''), response.xpath('.//a[@href]/@href').getall()))))
+        for n, i in enumerate(vers):
+            vers[n] = v.parse(i)
         version = max(vers)
 
         item = AppMonitorItem()
