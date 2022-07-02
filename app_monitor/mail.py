@@ -15,6 +15,7 @@ def _gen_mail(item):
         **item)
     html = """<html><head></head><body>\
             <p>{name}</p>
+            <p>{category}</p>
             <p>{version}</p>
             <p>{date}</p>
             <p>{notes}</p>""".format(**item)
