@@ -3,25 +3,29 @@ import scrapy
 from scrapy import Request
 from packaging import version as v
 
-
 from app_monitor.items import AppMonitorItem
 
 
 class DockerhubSpider(scrapy.Spider):
     name = 'dockerhub'
     allowed_domains = ['docker.io']
-    repos = ['dreamacro/clash-premium',
-             'codercom/code-server',
-             'jetbrains/upsource',
-             'minio/minio',
-             'bitnami/rabbitmq',
-             'atlassian/confluence-server',
-             'mysql/mysql-server',
-             'library/consul',
-             'library/sonarqube',
-             'library/elasticsearch',
-             'library/redis'
-             ]
+    repos = [
+        'atlassian/confluence-server',
+        'bitnami/rabbitmq',
+        'codercom/code-server',
+        'dreamacro/clash-premium',
+        'gocd/gocd-server',
+        'jetbrains/upsource',
+        'library/consul',
+        'library/sonarqube',
+        'library/elasticsearch',
+        'library/redis',
+        'linuxserver/deluge',
+        'minio/minio',
+        'mysql/mysql-server',
+        'portainer/portainer-ce',
+        'tanghc2020/torna'
+    ]
     login_url = 'https://auth.docker.io/token'
     query_url = 'https://registry-1.docker.io/v2/{name}/tags/list'
     token = ''
