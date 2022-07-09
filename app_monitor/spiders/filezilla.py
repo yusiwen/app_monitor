@@ -24,4 +24,3 @@ class FilezillaSpider(scrapy.Spider):
         item['tags'] = ['ftp', 'sftp']
         item['download_url'] = down_urls
         return item
-        pass
