@@ -40,6 +40,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'elastic/logstash', 'category': 'develop', 'tags': ['middleware',]},
         {'repo': 'flannel-io/flannel', 'category': 'develop', 'tags': ['k8s','cni']},
         {'repo': 'FredrikNoren/ungit', 'category': 'develop', 'tags': ['git', 'vcs']},
+        {'repo': 'gchudov/cuetools.net', 'category': 'tools', 'tags': ['media', 'cue']},
         {'repo': 'git-for-windows/git', 'category': 'develop', 'tags': ['git', 'vcs']},
         {'repo': 'gitahead/gitahead', 'category': 'develop', 'tags': ['git', 'vcs']},
         {'repo': 'gitextensions/gitextensions', 'category': 'develop', 'tags': ['git', 'vcs']},
