@@ -17,6 +17,7 @@ class GoSpider(scrapy.Spider):
         down_url_prefix = 'https://golang.org'
         path_templ = Template('//h2[@id="stable"]/following-sibling::div[1]//table//a[contains(text(), "$arch")]/@href')
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='linux-amd64.tar.gz')).get())
+        down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='linux-arm64.tar.gz')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='darwin-amd64.pkg')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64.msi')).get())
         down_urls.append(down_url_prefix + response.xpath(path_templ.substitute(arch='windows-amd64.zip')).get())
