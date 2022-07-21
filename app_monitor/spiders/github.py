@@ -71,6 +71,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'microsoft/vscode', 'category': 'tool', 'tags': ['ide']},
         {'repo': 'minio/minio', 'category': 'tool', 'tags': ['vps', 'oss']},
         {'repo': 'nvm-sh/nvm', 'category': 'tool', 'tags': ['nodejs']},
+        {'repo': 'obsidianmd/obsidian-releases', 'category': 'tool', 'tags': ['notetaking', 'markdown']},
         {'repo': 'PowerShell/Win32-OpenSSH', 'category': 'tool', 'tags': ['network', 'ssh']},
         {'repo': 'prometheus/node_exporter', 'category': 'develop', 'tags': ['middleware', 'monitoring']},
         {'repo': 'prometheus/prometheus', 'category': 'develop', 'tags': ['middleware', 'monitoring']},
