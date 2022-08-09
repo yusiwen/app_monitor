@@ -83,6 +83,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'rust-lang/rust', 'category': 'develop', 'tags': ['rust']},
         {'repo': 'shadowsocks/ShadowsocksX-NG', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'shadowsocks/shadowsocks-windows', 'category': 'tool', 'tags': ['gfw']},
+        {'repo': 'ShareX/ShareX', 'category': 'tool', 'tags': ['screenshot', 'ocr']},
         {'repo': 'sumatrapdfreader/sumatrapdf', 'category': 'tool', 'tags': ['pdf']},
         {'repo': 'tmux/tmux', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'tonsky/FiraCode', 'category': 'font', 'tags': ['font']},
