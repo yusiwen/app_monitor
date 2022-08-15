@@ -40,12 +40,13 @@ class ChartsSpider(scrapy.Spider):
         {'charts': ['elasticsearch', 'filebeat', 'kibana', 'logstash', 'metricbeat'], 'url': 'https://helm.elastic.co/'},
         {'charts': ['deluge'], 'url': 'https://k8s-at-home.com/charts/'},
         {'charts': ['metallb'], 'url': 'https://metallb.github.io/metallb/'},
+        {'charts': ['erda'], 'url': 'https://charts.erda.cloud/erda/'},
     ]
 
     def start_requests(self):
         for repo in self.repos:
             url = urljoin(repo['url'], 'index.yaml')
-            print(url)
+            
             yield Request(
                 url,
                 cb_kwargs=repo
