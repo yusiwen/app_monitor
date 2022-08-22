@@ -55,6 +55,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'hashicorp/consul', 'category': 'develop', 'tags': ['java', 'service discovery',
                                                                      'configuration management', 'microservice']},
         {'repo': 'HeidiSQL/HeidiSQL', 'category': 'develop', 'tags': ['database']},
+        {'repo': 'henrypp/memreduct', 'category': 'tool', 'tags': ['windows', 'memory']},
         {'repo': 'janeczku/calibre-web', 'category': 'tool', 'tags': ['vps', 'book', 'reading']},
         {'repo': 'jenkinsci/jenkins', 'category': 'tool', 'tags': ['vps', 'ci/cd']},
         {'repo': 'jgraph/drawio-desktop', 'category': 'tool', 'tags': ['chart', 'design']},
