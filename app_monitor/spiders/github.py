@@ -36,6 +36,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'cmderdev/cmder', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'CopyTranslator/CopyTranslator', 'category': 'tool', 'tags': ['language', 'translator']},
         {'repo': 'dbeaver/dbeaver', 'category': 'develop', 'tags': ['database']},
+        {'repo': 'dzikoysk/reposilite', 'category': 'develop', 'tags': ['maven']},
         {'repo': 'elastic/elasticsearch', 'category': 'develop', 'tags': ['middleware']},
         {'repo': 'elastic/kibana', 'category': 'develop', 'tags': ['middleware']},
         {'repo': 'elastic/logstash', 'category': 'develop', 'tags': ['middleware']},

@@ -14,6 +14,7 @@ class DockerhubSpider(scrapy.Spider):
         'bitnami/rabbitmq',
         'codercom/code-server',
         'dreamacro/clash-premium',
+        'dzikoysk/reposilite',
         'gocd/gocd-server',
         'jetbrains/upsource',
         'library/consul',
