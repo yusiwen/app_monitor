@@ -42,7 +42,7 @@ def send_mail(item):
     logging.info('Send mail.....')
 
     message = _gen_mail(item)
-    message['From'] = settings.SMTP_SENDER
+    message['From'] = 'Software Updater <' + settings.SMTP_SENDER + '>'
     message['To'] = settings.SMTP_RECEIVER
 
     context = ssl.create_default_context()
