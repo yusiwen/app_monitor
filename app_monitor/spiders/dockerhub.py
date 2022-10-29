@@ -13,6 +13,7 @@ class DockerhubSpider(scrapy.Spider):
         'atlassian/confluence-server',
         'bitnami/rabbitmq',
         'codercom/code-server',
+        'dbeaver/cloudbeaver',
         'dreamacro/clash-premium',
         'dzikoysk/reposilite',
         'gocd/gocd-server',

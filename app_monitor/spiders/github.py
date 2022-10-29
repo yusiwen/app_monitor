@@ -35,6 +35,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'cdr/code-server', 'category': 'tool', 'tags': ['vps', 'ide']},
         {'repo': 'cmderdev/cmder', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'CopyTranslator/CopyTranslator', 'category': 'tool', 'tags': ['language', 'translator']},
+        {'repo': 'dbeaver/cloudbeaver', 'category': 'develop', 'tags': ['cloud computing', 'database']},
         {'repo': 'dbeaver/dbeaver', 'category': 'develop', 'tags': ['database']},
         {'repo': 'dzikoysk/reposilite', 'category': 'develop', 'tags': ['maven']},
         {'repo': 'elastic/elasticsearch', 'category': 'develop', 'tags': ['middleware']},
