@@ -71,6 +71,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'laurent22/joplin', 'category': 'tool', 'tags': ['notetaking']},
         {'repo': 'lensapp/lens', 'category': 'tool', 'tags': ['cloud computing', 'kubernetes']},
         {'repo': 'lxgw/LxgwWenKai', 'category': 'font', 'tags': ['font']},
+        {'repo': 'marktext/marktext', 'category': 'tool', 'tags': ['markdown', 'editor']},
         {'repo': 'medcl/elasticsearch-analysis-ik', 'category': 'develop', 'tags': ['middleware', 'plugin']},
         {'repo': 'metallb/metallb', 'category': 'develop', 'tags': ['k8s', 'lb']},
         {'repo': 'microsoft/cascadia-code', 'category': 'font', 'tags': ['font']},
