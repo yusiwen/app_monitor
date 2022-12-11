@@ -41,6 +41,7 @@ class ChartsSpider(scrapy.Spider):
         {'charts': ['deluge'], 'url': 'https://k8s-at-home.com/charts/'},
         {'charts': ['metallb'], 'url': 'https://metallb.github.io/metallb/'},
         {'charts': ['erda'], 'url': 'https://charts.erda.cloud/erda/'},
+        {'charts': ['jupyterhub'], 'url': 'https://jupyterhub.github.io/helm-chart/'},
     ]
 
     def start_requests(self):
