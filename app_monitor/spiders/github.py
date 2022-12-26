@@ -21,6 +21,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'alibaba/Sentinel', 'category': 'develop', 'tags': ['java', 'flow control', 'microservice']},
         {'repo': 'audacity/audacity', 'category': 'tool', 'tags': ['audio']},
         {'repo': 'beekeeper-studio/beekeeper-studio', 'category': 'develop', 'tags': ['database']},
+        {'repo': 'dandavison/delta', 'category': 'tools', 'tags': ['cli', 'pager']},
         {'repo': 'Dreamacro/clash', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'Eugeny/tabby', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'Fndroid/clash_for_windows_pkg', 'category': 'tool', 'tags': ['gfw']},
