@@ -92,6 +92,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'shadowsocks/ShadowsocksX-NG', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'shadowsocks/shadowsocks-windows', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'ShareX/ShareX', 'category': 'tool', 'tags': ['screenshot', 'ocr']},
+        {'repo': 'sharkdp/bat', 'category': 'tool', 'tags': ['cli']},
         {'repo': 'sumatrapdfreader/sumatrapdf', 'category': 'tool', 'tags': ['pdf']},
         {'repo': 'tmux/tmux', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'tonsky/FiraCode', 'category': 'font', 'tags': ['font']},
