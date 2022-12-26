@@ -62,6 +62,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'janeczku/calibre-web', 'category': 'tool', 'tags': ['vps', 'book', 'reading']},
         {'repo': 'jenkinsci/jenkins', 'category': 'tool', 'tags': ['vps', 'ci/cd']},
         {'repo': 'jgraph/drawio-desktop', 'category': 'tool', 'tags': ['chart', 'design']},
+        {'repo': 'junegunn/fzf', 'category': 'tool', 'tags': ['cli', 'search', 'filter']},
         {'repo': 'keeweb/keeweb', 'category': 'tool', 'tags': ['security', 'password manager']},
         {'repo': 'koalaman/shellcheck', 'category': 'tool', 'tags': ['shell', 'analyzer']},
         {'repo': 'kubeedge/kubeedge', 'category': 'develop',
