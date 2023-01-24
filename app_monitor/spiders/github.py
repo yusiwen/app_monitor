@@ -91,6 +91,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'qishibo/AnotherRedisDesktopManager', 'category': 'tool', 'tags': ['cache']},
         {'repo': 'redis/redis', 'category': 'develop', 'tags': ['middleware', 'cache']},
         {'repo': 'rootless-containers/rootlesskit', 'category': 'tool', 'tags': ['container', 'cloud computing']},
+        {'repo': 'rootless-containers/slirp4netns', 'category': 'tool', 'tags': ['container', 'cloud computing']},
         {'repo': 'rust-lang/rust', 'category': 'develop', 'tags': ['rust']},
         {'repo': 'shadowsocks/ShadowsocksX-NG', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'shadowsocks/shadowsocks-windows', 'category': 'tool', 'tags': ['gfw']},
