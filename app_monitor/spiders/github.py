@@ -80,6 +80,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'medcl/elasticsearch-analysis-ik', 'category': 'develop', 'tags': ['middleware', 'plugin']},
         {'repo': 'metallb/metallb', 'category': 'develop', 'tags': ['k8s', 'lb']},
         {'repo': 'microsoft/cascadia-code', 'category': 'font', 'tags': ['font']},
+        {'repo': 'microsoft/terminal', 'category': 'tool', 'tags': ['terminal']},
         {'repo': 'microsoft/vscode', 'category': 'tool', 'tags': ['ide']},
         {'repo': 'minio/minio', 'category': 'tool', 'tags': ['vps', 'oss']},
         {'repo': 'nvm-sh/nvm', 'category': 'tool', 'tags': ['nodejs']},
