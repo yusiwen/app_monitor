@@ -62,6 +62,8 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'hashicorp/vagrant', 'category': 'tool', 'tags': ['virtualization']},
         {'repo': 'HeidiSQL/HeidiSQL', 'category': 'develop', 'tags': ['database']},
         {'repo': 'henrypp/memreduct', 'category': 'tool', 'tags': ['windows', 'memory']},
+        {'repo': 'IrineSistiana/mosdns', 'category': 'tool', 'tags': ['network', 'dns', 'gfw']},
+        {'repo': 'IrineSistiana/mosdns-cn', 'category': 'tool', 'tags': ['network', 'dns', 'gfw']},
         {'repo': 'janeczku/calibre-web', 'category': 'tool', 'tags': ['vps', 'book', 'reading']},
         {'repo': 'jenkinsci/jenkins', 'category': 'tool', 'tags': ['vps', 'ci/cd']},
         {'repo': 'jgraph/drawio-desktop', 'category': 'tool', 'tags': ['chart', 'design']},
