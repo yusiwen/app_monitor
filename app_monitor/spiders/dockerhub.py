@@ -17,6 +17,7 @@ class DockerhubSpider(scrapy.Spider):
         'dreamacro/clash-premium',
         'dzikoysk/reposilite',
         'gocd/gocd-server',
+        'irinesistiana/mosdns',
         'jetbrains/youtrack',
         'jetbrains/upsource',
         'library/consul',
