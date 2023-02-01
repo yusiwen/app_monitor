@@ -106,6 +106,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'tonsky/FiraCode', 'category': 'font', 'tags': ['font']},
         {'repo': 'traefik/traefik', 'category': 'develop', 'tags': ['k8s', 'cloud native', 'gateway']},
         {'repo': 'visualfc/liteide', 'category': 'develop', 'tags': ['go', 'ide']},
+        {'repo': 'wez/wezterm', 'category': 'tool', 'tags': ['terminal', 'desktop']},
         {'repo': 'zealdocs/zeal', 'category': 'tool', 'tags': ['reference', 'document', 'reading']},
     ]
     http_user = settings.GITHUB_USER
