@@ -108,6 +108,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'traefik/traefik', 'category': 'develop', 'tags': ['k8s', 'cloud native', 'gateway']},
         {'repo': 'visualfc/liteide', 'category': 'develop', 'tags': ['go', 'ide']},
         {'repo': 'wez/wezterm', 'category': 'tool', 'tags': ['terminal', 'desktop']},
+        {'repo': 'wagoodman/dive', 'category': 'tool', 'tags': ['docker', 'cloud', 'container']},
         {'repo': 'zealdocs/zeal', 'category': 'tool', 'tags': ['reference', 'document', 'reading']},
     ]
     http_user = settings.GITHUB_USER
