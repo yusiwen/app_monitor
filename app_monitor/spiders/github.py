@@ -17,6 +17,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'adoptium/temurin17-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk17']},
         {'repo': 'adoptium/temurin18-binaries', 'category': 'develop', 'tags': ['java', 'jdk', 'jdk18']},
         {'repo': 'Alexey-T/CudaText', 'category': 'tool', 'tags': ['editor']},
+        {'repo': 'alexkulya/pandaria_5.4.8', 'category': 'game', 'tags': ['wow', 'pandaria']},
         {'repo': 'alibaba/arthas', 'category': 'develop', 'tags': ['java', 'debug', 'diagnostic']},
         {'repo': 'alibaba/jetcache', 'category': 'develop', 'tags': ['java', 'library', 'cache']},
         {'repo': 'alibaba/nacos', 'category': 'develop', 'tags': ['java', 'service discovery',
