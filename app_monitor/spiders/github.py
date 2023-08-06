@@ -40,6 +40,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'dandavison/delta', 'category': 'tools', 'tags': ['cli', 'pager']},
         {'repo': 'dbeaver/cloudbeaver', 'category': 'develop', 'tags': ['cloud computing', 'database']},
         {'repo': 'dbeaver/dbeaver', 'category': 'develop', 'tags': ['database']},
+        {'repo': 'docker/compose', 'category': 'develop', 'tags': ['container']},
         {'repo': 'dzikoysk/reposilite', 'category': 'develop', 'tags': ['maven']},
         {'repo': 'Dreamacro/clash', 'category': 'tool', 'tags': ['gfw']},
         {'repo': 'elastic/elasticsearch', 'category': 'develop', 'tags': ['middleware']},
