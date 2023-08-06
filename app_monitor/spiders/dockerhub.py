@@ -17,6 +17,9 @@ class DockerhubSpider(scrapy.Spider):
         'dreamacro/clash-premium',
         'dzikoysk/reposilite',
         'gocd/gocd-server',
+        'grafana/grafana',
+        'grafana/loki',
+        'grafana/promtail',
         'irinesistiana/mosdns',
         'jetbrains/youtrack',
         'jetbrains/upsource',
@@ -28,6 +31,10 @@ class DockerhubSpider(scrapy.Spider):
         'minio/minio',
         'mysql/mysql-server',
         'portainer/portainer-ce',
+        'prom/alertmanager',
+        'prom/node-exporter',
+        'prom/prometheus',
+        'prom/pushgateway',
         'tanghc2020/torna'
     ]
     login_url = 'https://auth.docker.io/token'
