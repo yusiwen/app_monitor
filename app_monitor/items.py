@@ -10,6 +10,7 @@ import scrapy
 
 class AppMonitorItem(scrapy.Item):
     id = scrapy.Field()
+    type = scrapy.Field()
     name = scrapy.Field()
     version = scrapy.Field()
     date = scrapy.Field()

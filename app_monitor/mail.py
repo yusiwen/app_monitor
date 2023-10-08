@@ -10,7 +10,10 @@ from app_monitor import settings
 def _gen_mail(item):
     # Create the container (outer) email message.
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = item['name'] + ' Update Found'
+    if item['type'] == 'commit':
+        msg['Subject'] = item['name'] + ' New Commits Found'
+    else:
+        msg['Subject'] = item['name'] + ' Update Found'
     text = "{name}\n{version}\n{date}\n{notes}\n{download_url}".format(
         **item)
     html = """<html><head></head><body>\
