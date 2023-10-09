@@ -4,8 +4,6 @@ import errno
 import logging
 import os
 
-from packaging import version
-
 from app_monitor import es
 from app_monitor import mail
 from app_monitor import settings
@@ -71,11 +69,11 @@ class AppMonitorPipeline(object):
     def __check_version(item):
         previous_ver = AppMonitorPipeline.__get_previous_version(item)
         if previous_ver is not None:
-            if version.parse(previous_ver) < version.parse(item['version']):
+            if previous_ver != item['version']:
                 AppMonitorPipeline.__save_version(item, update=True)
                 mail.send_mail(item)
             else:
-                logging.info('No Update found, skipping...')
+                logging.info('No Update found, skipping...%s', item['name'])
         else:  # if no previous version has been found, then this check is running the first time
             AppMonitorPipeline.__save_version(item)
             if settings.SEND_MAIL:

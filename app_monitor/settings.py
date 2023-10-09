@@ -3,6 +3,15 @@
 import configparser
 import os
 
+from logging.handlers import RotatingFileHandler
+from scrapy.utils.log import configure_logging
+
+import logging
+
+logHandler = RotatingFileHandler('app-monitor.log', maxBytes=50000000, backupCount=10)
+configure_logging(install_root_handler=False)
+logging.basicConfig(handlers=[logHandler])
+
 # Scrapy settings for app_monitor project
 #
 # For simplicity, this file contains only settings considered important or
@@ -22,6 +31,8 @@ NEWSPIDER_MODULE = 'app_monitor.spiders'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
+
+REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -91,7 +102,7 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-APP_MONITOR_CONFIG_FILE = '~/.app_monitor.cfg'
+APP_MONITOR_CONFIG_FILES = ['/etc/scrapy/app_monitor.cfg', '~/.config/scrapy/app_monitor.cfg', '~/.app_monitor.cfg']
 
 SEND_MAIL = False
 USE_PROXY = False
@@ -118,38 +129,64 @@ ES_TYPE = ''
 GITHUB_USER = ''
 GITHUB_ACCESS_TOKEN = ''
 
-if not os.path.isfile(os.path.expanduser(APP_MONITOR_CONFIG_FILE)):
-    SEND_MAIL = False
-    USE_PROXY = False
-    ES_ENABLE = False
-else:
-    config = configparser.ConfigParser()
-    config.read(os.path.expanduser(APP_MONITOR_CONFIG_FILE))
 
+def load_config(config_file):
+    print("Loading configuration from: %s", config_file)
+    config = configparser.ConfigParser()
+    config.read(os.path.expanduser(config_file))
+
+    global SEND_MAIL
     SEND_MAIL = config.getboolean('mail', 'enable')
+    global SMTP_SERVER
     SMTP_SERVER = config['mail']['smtp_server']
+    global SMTP_PORT
     SMTP_PORT = config['mail']['smtp_port']
+    global SMTP_USERNAME
     SMTP_USERNAME = config['mail']['smtp_username']
+    global SMTP_PASSWORD
     SMTP_PASSWORD = config['mail']['smtp_password']
+    global SMTP_SENDER
     SMTP_SENDER = config['mail']['sender']
+    global SMTP_RECEIVER
     SMTP_RECEIVER = config['mail']['receiver']
 
+    global USE_PROXY
     USE_PROXY = config.getboolean('proxy', 'enable')
+    global PROXY_HOST
     PROXY_HOST = config['proxy']['url']
+    global PROXY_USERNAME
     PROXY_USERNAME = config['proxy']['username']
+    global PROXY_PASSWORD
     PROXY_PASSWORD = config['proxy']['password']
 
+    global ES_ENABLE
     ES_ENABLE = config.getboolean('elasticsearch', 'enable')
+    global ES_HOSTS
     ES_HOSTS = config.get('elasticsearch', 'hosts').split(',')
+    global ES_PORT
     ES_PORT = config.getint('elasticsearch', 'port')
+    global ES_USERNAME
     ES_USERNAME = config['elasticsearch']['username']
+    global ES_PASSWORD
     ES_PASSWORD = config['elasticsearch']['password']
+    global ES_USE_SSL
     ES_USE_SSL = config['elasticsearch']['use_ssl']
+    global ES_CERT
     ES_CERT = config['elasticsearch']['cert']
+    global ES_INDEX
     ES_INDEX = config['elasticsearch']['index']
+    global ES_TYPE
     ES_TYPE = config['elasticsearch']['type']
     if ES_TYPE == '':
         ES_TYPE = '_doc'
 
+    global GITHUB_USER
     GITHUB_USER = config['github']['username']
+    global GITHUB_ACCESS_TOKEN
     GITHUB_ACCESS_TOKEN = config['github']['access_token']
+
+
+for file in APP_MONITOR_CONFIG_FILES:
+    if os.path.isfile(os.path.expanduser(file)):
+        load_config(file)
+        break

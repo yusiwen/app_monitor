@@ -1,0 +1,7 @@
+elasticsearch==7.17.9
+lxml==4.9.3
+packaging==23.2
+requests==2.31.0
+Scrapy==2.11.0
+w3lib==2.1.2
+pyyaml~=6.0.1

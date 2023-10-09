@@ -124,13 +124,14 @@ class GithubSpider(scrapy.Spider):
     def start_requests(self):
         for repo in self.repos:
             url = self.template_url.format(repo_name=repo['repo'])
-            print(url)
+            self.logger.info("Send request to %s", url)
             yield Request(
                 url,
                 cb_kwargs=repo
             )
 
     def parse(self, response, **kwargs):
+        self.logger.info("Parse response on %s", response.url)
         json_dict = response.json()
         app_id = kwargs['repo']
         version = json_dict['tag_name']
