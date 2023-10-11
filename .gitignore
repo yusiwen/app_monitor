@@ -5,3 +5,6 @@ output/
 venv/
 .venv/
 *.log
+build/
+dist/
+*.egg-info/

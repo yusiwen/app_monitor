@@ -2,3 +2,6 @@ venv
 .venv
 app_monitor.sample.cfg
 *.log
+build/
+dist/
+*.egg-info/

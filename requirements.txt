@@ -5,3 +5,6 @@ requests==2.31.0
 Scrapy==2.11.0
 w3lib==2.1.2
 pyyaml~=6.0.1
+setuptools==68.2.2
+scrapyd==1.4.3
+scrapyd-client==1.2.3
