@@ -3,15 +3,6 @@
 import configparser
 import os
 
-from logging.handlers import RotatingFileHandler
-from scrapy.utils.log import configure_logging
-
-import logging
-
-logHandler = RotatingFileHandler('app-monitor.log', maxBytes=50000000, backupCount=10)
-configure_logging(install_root_handler=False)
-logging.basicConfig(handlers=[logHandler])
-
 # Scrapy settings for app_monitor project
 #
 # For simplicity, this file contains only settings considered important or
@@ -131,7 +122,7 @@ GITHUB_ACCESS_TOKEN = ''
 
 
 def load_config(config_file):
-    print("Loading configuration from: %s", config_file)
+    print("Loading configuration from: ", config_file)
     config = configparser.ConfigParser()
     config.read(os.path.expanduser(config_file))
 
