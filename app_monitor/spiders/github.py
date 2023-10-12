@@ -160,5 +160,12 @@ class GithubSpider(scrapy.Spider):
         item['id'] = app_id
         item['category'] = kwargs['category']
         item['tags'] = kwargs['tags']
-        item['download_url'] = json_dict['html_url']
+        assets = json_dict['assets']
+        if assets is not None:
+            down_urls = []
+            for asset in assets:
+                down_urls.append(asset['browser_download_url'])
+            item['download_url'] = down_urls
+        else:
+            item['download_url'] = json_dict['html_url']
         return item
