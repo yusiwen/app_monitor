@@ -122,13 +122,28 @@ class GithubSpider(scrapy.Spider):
     http_pass = settings.GITHUB_ACCESS_TOKEN
 
     def start_requests(self):
-        for repo in self.repos:
-            url = self.template_url.format(repo_name=repo['repo'])
-            self.logger.info("Send request to %s", url)
-            yield Request(
-                url,
-                cb_kwargs=repo
-            )
+        if hasattr(self, 'repo') and len(self.repo) > 0:
+            hit = False
+            for r in self.repos:
+                if r['repo'] == self.repo:
+                    url = self.template_url.format(repo_name=self.repo)
+                    self.logger.info("Send request to %s", url)
+                    yield Request(
+                        url,
+                        cb_kwargs=r
+                    )
+                    hit = True
+                    break
+            if not hit:
+                self.logger.error("Repo %s is not configured", self.repo)
+        else:
+            for repo in self.repos:
+                url = self.template_url.format(repo_name=repo['repo'])
+                self.logger.info("Send request to %s", url)
+                yield Request(
+                    url,
+                    cb_kwargs=repo
+                )
 
     def parse(self, response, **kwargs):
         self.logger.info("Parse response on %s", response.url)
