@@ -1,6 +1,7 @@
 from urllib.parse import urljoin
 
 from yaml import load
+
 try:
     from yaml import CLoader as Loader
 except ImportError:
@@ -31,13 +32,15 @@ class ChartsSpider(scrapy.Spider):
         {'charts': ['ceph-csi-cephfs', 'ceph-csi-rbd'], 'url': 'https://ceph.github.io/csi-charts/'},
         {'charts': ['kube-prometheus-stack'], 'url': 'https://prometheus-community.github.io/helm-charts/'},
         {'charts': ['metrics-server'], 'url': 'https://kubernetes-sigs.github.io/metrics-server/'},
-        {'charts': ['nfs-subdir-external-provisioner'], 'url': 'https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/'},
+        {'charts': ['nfs-subdir-external-provisioner'],
+         'url': 'https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/'},
         {'charts': ['mongodb'], 'url': 'https://charts.bitnami.com/bitnami/'},
         {'charts': ['community-operator'], 'url': 'https://mongodb.github.io/helm-charts/'},
         {'charts': ['minio'], 'url': 'https://charts.min.io/'},
         {'charts': ['gocd'], 'url': 'https://gocd.github.io/helm-chart/'},
         {'charts': ['keycloak'], 'url': 'https://codecentric.github.io/helm-charts/'},
-        {'charts': ['elasticsearch', 'filebeat', 'kibana', 'logstash', 'metricbeat'], 'url': 'https://helm.elastic.co/'},
+        {'charts': ['elasticsearch', 'filebeat', 'kibana', 'logstash', 'metricbeat'],
+         'url': 'https://helm.elastic.co/'},
         {'charts': ['deluge'], 'url': 'https://k8s-at-home.com/charts/'},
         {'charts': ['metallb'], 'url': 'https://metallb.github.io/metallb/'},
         {'charts': ['erda'], 'url': 'https://charts.erda.cloud/erda/'},
@@ -47,7 +50,7 @@ class ChartsSpider(scrapy.Spider):
     def start_requests(self):
         for repo in self.repos:
             url = urljoin(repo['url'], 'index.yaml')
-            
+
             yield Request(
                 url,
                 cb_kwargs=repo
@@ -71,4 +74,3 @@ class ChartsSpider(scrapy.Spider):
             item['tags'] = 'chart'
             item['download_url'] = kwargs['url']
             yield item
-

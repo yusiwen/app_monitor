@@ -4,6 +4,8 @@ import ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+from airium import Airium
+
 from app_monitor import settings
 
 
@@ -13,28 +15,38 @@ def _gen_mail(item):
     msg['Subject'] = item['name'] + ' Update Found'
     text = "{name}\n{version}\n{date}\n{notes}\n{download_url}".format(
         **item)
-    html = """<html><head></head><body>\
-            <p>{name}</p>
-            <p>{category}</p>
-            <p>{version}</p>
-            <p>{date}</p>
-            <p>{notes}</p>""".format(**item)
-    urls = item['download_url']
-    dwn_str = ''
-    if isinstance(urls, str):
-        dwn_str = "<p><a href='{}'>{}</a></p>".format(
-            urls, urls)
-    elif isinstance(urls, list):
-        for x in urls:
-            dwn_str += "<p><a href='{}'>{}</a></p>".format(
-                x, x)
-    else:
-        dwn_str = ''
 
-    html += dwn_str + '</body></html>'
+    a = Airium()
+    # Generating HTML file
+    a('<!DOCTYPE html>')
+    with a.html(lang="en"):
+        with a.head():
+            a.meta(charset="utf-8")
+            a.title(item['name'] + ' Update Found')
+        with a.body():
+            with a.p():
+                a(item['name'])
+            with a.p():
+                a(item['category'])
+            with a.p():
+                a(item['version'])
+            with a.p():
+                a(item['date'])
+            with a.p():
+                a(item['notes'])
+            urls = item['download_url']
+            if isinstance(urls, str):
+                with a.p():
+                    with a.a(href=urls):
+                        a(urls)
+            elif isinstance(urls, list):
+                for x in urls:
+                    with a.p():
+                        with a.a(href=x):
+                            a(x)
 
     msg.attach(MIMEText(text, 'plain'))
-    msg.attach(MIMEText(html, 'html'))
+    msg.attach(MIMEText(str(a), 'html'))
     return msg
 
 

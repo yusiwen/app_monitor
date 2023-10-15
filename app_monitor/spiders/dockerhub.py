@@ -1,7 +1,7 @@
 import requests
 import scrapy
-from scrapy import Request
 from packaging import version as v
+from scrapy import Request
 
 from app_monitor.items import AppMonitorItem
 

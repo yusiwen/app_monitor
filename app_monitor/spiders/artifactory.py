@@ -1,7 +1,7 @@
 import scrapy
+from packaging import version as v
 
 from app_monitor.items import AppMonitorItem
-from packaging import version as v
 
 
 class ArtifactorySpider(scrapy.Spider):

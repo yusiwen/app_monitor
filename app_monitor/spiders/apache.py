@@ -1,10 +1,10 @@
 import re
 
 import scrapy
+from packaging.version import parse
 from scrapy import Request
 
 from app_monitor.items import AppMonitorItem
-from packaging.version import parse
 
 
 class ApacheSpider(scrapy.Spider):
@@ -17,7 +17,8 @@ class ApacheSpider(scrapy.Spider):
          'tags': ['java', 'osgi', 'karaf', 'apache']},
         {'repo': 'apache-karaf-cellar', 'name': 'Apache Karaf Cellar', 'url': 'https://dlcdn.apache.org/karaf/cellar/',
          'tags': ['java', 'osgi', 'karaf', 'apache']},
-        {'repo': 'apache-karaf-decanter', 'name': 'Apache Karaf Decanter', 'url': 'https://dlcdn.apache.org/karaf/decanter/',
+        {'repo': 'apache-karaf-decanter', 'name': 'Apache Karaf Decanter',
+         'url': 'https://dlcdn.apache.org/karaf/decanter/',
          'tags': ['java', 'osgi', 'karaf', 'apache']},
         {'repo': 'apache-maven3', 'name': 'Apache Maven 3.x', 'url': 'https://dlcdn.apache.org/maven/maven-3/',
          'tags': ['java', 'build', 'maven', 'apache']},

@@ -22,7 +22,6 @@ class NodeSpider(scrapy.Spider):
         item['category'] = 'develop'
         item['tags'] = ['nodejs', 'javascript']
 
-
         down_urls = ['https://nodejs.org/dist/v' + version + '/node-v' + version + '-x64.msi',
                      'https://nodejs.org/dist/v' + version + '/node-v' + version + '.pkg',
                      'https://nodejs.org/dist/v' + version + '/node-v' + version + '-linux-x64.tar.xz',

@@ -23,5 +23,4 @@ class NmapSpider(scrapy.Spider):
         item['category'] = 'tool'
         item['tags'] = ['network', 'nmap']
 
-
         return item
