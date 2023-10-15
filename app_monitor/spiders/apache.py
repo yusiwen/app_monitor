@@ -1,143 +1,101 @@
+import re
+
 import scrapy
+from scrapy import Request
 
 from app_monitor.items import AppMonitorItem
+from packaging.version import parse
 
 
 class ApacheSpider(scrapy.Spider):
     name = 'apache'
     allowed_domains = ['apache.org']
-    start_urls = ['http://maven.apache.org/download.cgi',
-                  'https://tomcat.apache.org/download-80.cgi',
-                  'https://tomcat.apache.org/download-90.cgi',
-                  'http://karaf.apache.org/download.html',
-                  'https://felix.apache.org/downloads.cgi']
+    repos = [
+        {'repo': 'apache-karaf-runtime', 'name': 'Apache Karaf Runtime', 'url': 'https://dlcdn.apache.org/karaf/',
+         'tags': ['java', 'osgi', 'karaf', 'apache']},
+        {'repo': 'apache-karaf-cave', 'name': 'Apache Karaf Cave', 'url': 'https://dlcdn.apache.org/karaf/cave/',
+         'tags': ['java', 'osgi', 'karaf', 'apache']},
+        {'repo': 'apache-karaf-cellar', 'name': 'Apache Karaf Cellar', 'url': 'https://dlcdn.apache.org/karaf/cellar/',
+         'tags': ['java', 'osgi', 'karaf', 'apache']},
+        {'repo': 'apache-karaf-decanter', 'name': 'Apache Karaf Decanter', 'url': 'https://dlcdn.apache.org/karaf/decanter/',
+         'tags': ['java', 'osgi', 'karaf', 'apache']},
+        {'repo': 'apache-maven3', 'name': 'Apache Maven 3.x', 'url': 'https://dlcdn.apache.org/maven/maven-3/',
+         'tags': ['java', 'build', 'maven', 'apache']},
+        {'repo': 'apache-maven4', 'name': 'Apache Maven 4.x', 'url': 'https://dlcdn.apache.org/maven/maven-4/',
+         'tags': ['java', 'build', 'maven', 'apache']},
+        {'repo': 'apache-tomcat8', 'name': 'Apache Tomcat 8.x', 'url': 'https://dlcdn.apache.org/tomcat/tomcat-8/',
+         'tags': ['java', 'tomcat', 'web', 'apache']},
+        {'repo': 'apache-tomcat9', 'name': 'Apache Tomcat 9.x', 'url': 'https://dlcdn.apache.org/tomcat/tomcat-9/',
+         'tags': ['java', 'tomcat', 'web', 'apache']},
+        {'repo': 'apache-tomcat10', 'name': 'Apache Tomcat 10.x', 'url': 'https://dlcdn.apache.org/tomcat/tomcat-10/',
+         'tags': ['java', 'tomcat', 'web', 'apache']},
+    ]
 
-    def _parse_maven(self, response):
-        version = response.xpath(
-            '//main/section/h2/text()').get().split(' ')[-1]
-        item = AppMonitorItem()
-        item['name'] = 'Apache Maven'
-        item['version'] = version
-        item['date'] = None
-        item['notes'] = ''
-        item['id'] = 'apache-maven'
-        item['category'] = 'develop'
-        item['tags'] = ['java', 'build', 'apache']
-        item['download_url'] = response.xpath(
-            '//main/section/section/table//a[contains(text(),"bin.zip")]/@href').get()
-        return item
+    def _get_latest_version(self, links):
+        reg = re.compile(r'^(\d|v\d).*')
+        # list of {original_ver, ver}
+        versions = list(map(lambda x: dict(original_ver=x, ver=parse(x)),
+                            list(map(lambda x: x.rstrip('/'), list(filter(reg.search, links))))))
+        # return the max version compared by 'ver'
+        return max(versions, key=lambda x: x['ver'])
 
-    def _parse_tomcat(self, ver_no, response):
-        str_ver_no = str(ver_no)
-        version = response.xpath(
-            '//main//div[@id="content"]/h3[contains(text(), "' + str_ver_no + '.")]/text()').get()
-        item = AppMonitorItem()
-        item['name'] = 'Apache Tomcat ' + str_ver_no
-        item['version'] = version
-        item['date'] = None
-        item['notes'] = ''
-        item['category'] = 'develop'
-        item['tags'] = ['java', 'tomcat', 'apache']
-        item['id'] = 'apache-tomcat' + str_ver_no
+    def _parse_latest_version_contents(self, response, version, id, name, tags):
+        if len(response.xpath('//a[contains(text(), "binaries")]').getall()) > 0:
+            yield scrapy.Request(response.url + "binaries", callback=self._parse_latest_version_contents,
+                                 cb_kwargs=dict(version=version, id=id, name=name,
+                                                tags=tags))
+        elif len(response.xpath('//a[contains(text(), "bin")]').getall()) > 0:
+            yield scrapy.Request(response.url + "bin", callback=self._parse_latest_version_contents,
+                                 cb_kwargs=dict(version=version, id=id, name=name,
+                                                tags=tags))
+        else:
+            item = AppMonitorItem()
+            item['name'] = name
+            item['version'] = version
+            item['date'] = None
+            item['notes'] = ''
+            item['category'] = 'develop'
+            item['tags'] = tags
+            item['id'] = id
 
-        down_urls = [response.xpath(
-            '//main//div[@id="content"]//li[contains(text(), "Core")]/ul/li/a[text()[re:test(., "^zip$")]]/@href').get(),
-                     response.xpath(
-                         '//main//div[@id="content"]//li[contains(text(), "documentation")]/ul/li/a/@href').get(),
-                     response.xpath(
-                         '//main//div[@id="content"]//li[contains(text(), "Deployer")]/ul/li/a[text()[re:test(., '
-                         '"^zip$")]]/@href').get()]
-        item['download_url'] = down_urls
-        return item
+            reg = re.compile(r'^apache-.*')
+            urls = response.xpath('//a/@href').getall()
+            urls = list(map(lambda x: response.url + x, list(filter(reg.search, urls))))
+            item['download_url'] = urls
+            yield item
 
-    def _parse_karaf(self, response):
-        core_version = response.xpath(
-            '//main//h3[contains(text(), "Karaf Runtime")]/span/text()').get()
+    def _parse_repo(self, response, **kwargs):
+        core_version = self._get_latest_version(response.xpath('//pre//a/text()').getall())
+        url = kwargs['url'] + "{version}/"
+        # use 'original_ver' because 'ver' could be converted by packaging.version to semver format.
+        # e.g. '4.0.0-alpha-8' to '4.0.0a8'
+        url = url.format(version=core_version['original_ver'])
+        yield scrapy.Request(url, callback=self._parse_latest_version_contents,
+                             cb_kwargs=dict(version=core_version['original_ver'], id=kwargs['repo'],
+                                            name=kwargs['name'],
+                                            tags=kwargs['tags']))
 
-        item = AppMonitorItem()
-        item['name'] = 'Apache Karaf Runtime'
-        item['version'] = core_version
-        item['date'] = None
-        item['notes'] = ''
-        item['category'] = 'develop'
-        item['tags'] = ['java', 'osgi', 'karaf', 'apache']
-        item['id'] = 'apache-karaf-runtime'
-        item['download_url'] = response.xpath(
-            '//main//h3[contains(text(), "Karaf Runtime")]//following-sibling::p[contains(text(), '
-            '"Binary Distribution")]/a[contains(text(), "zip")]/@href').get()
-        yield item
-
-        cellar_version = response.xpath(
-            '//main//h3[contains(text(), "Karaf Cellar")]/span/text()').get()
-        item = AppMonitorItem()
-        item['name'] = 'Apache Karaf Cellar'
-        item['version'] = cellar_version
-        item['date'] = None
-        item['notes'] = ''
-        item['category'] = 'develop'
-        item['tags'] = ['java', 'osgi', 'karaf', 'apache']
-        item['id'] = 'apache-karaf-cellar'
-        item['download_url'] = 'http://karaf.apache.org/download.html#cellar-installation'
-        yield item
-
-        cave_version = response.xpath(
-            '//main//h3[contains(text(), "Karaf Cave")]/span/text()').get()
-        item = AppMonitorItem()
-        item['name'] = 'Apache Karaf Cave'
-        item['version'] = cave_version
-        item['date'] = None
-        item['notes'] = ''
-        item['category'] = 'develop'
-        item['tags'] = ['java', 'osgi', 'karaf', 'apache']
-        item['id'] = 'apache-karaf-cave'
-        item['download_url'] = 'http://karaf.apache.org/download.html#cave-installation'
-        yield item
-
-        decanter_version = response.xpath(
-            '//main//h3[contains(text(), "Karaf Decanter")]/span/text()').get()
-        item = AppMonitorItem()
-        item['name'] = 'Apache Karaf Decanter'
-        item['version'] = decanter_version
-        item['date'] = None
-        item['notes'] = ''
-        item['category'] = 'develop'
-        item['tags'] = ['java', 'osgi', 'karaf', 'apache']
-        item['id'] = 'apache-karaf-decanter'
-        item['download_url'] = 'http://karaf.apache.org/download.html#decanter-installation'
-        yield item
-
-    def _parse_felix(self, response):
-        base_path = '//div[@class="main"]//table[@class="table"]/tbody/tr/td[contains(text(), "Felix Framework ' \
-                    'Distribution")] '
-        version = response.xpath(
-            base_path + '/following-sibling::td[1]/text()').get().split(' ')[0]
-
-        item = AppMonitorItem()
-        item['name'] = 'Apache Felix'
-        item['version'] = version
-        item['date'] = None
-        item['notes'] = 'Changelog: ' + response.xpath(base_path +
-                                                       '/following-sibling::td[1]/a/@href').get()
-        item['id'] = 'apache-felix'
-        item['category'] = 'develop'
-        item['tags'] = ['java', 'osgi', 'felix', 'apache']
-        item['download_url'] = response.xpath(base_path +
-                                              '/following-sibling::td[2]/a[contains(text(), "zip")]/@href').get()
-        return item
+    def start_requests(self):
+        if hasattr(self, 'repo') and len(self.repo) > 0:
+            hit = False
+            for r in self.repos:
+                if r['repo'] == self.repo:
+                    self.logger.info("Send request to %s", r['url'])
+                    yield Request(
+                        r['url'],
+                        cb_kwargs=r
+                    )
+                    hit = True
+                    break
+            if not hit:
+                self.logger.error("Repo %s is not configured", self.repo)
+        else:
+            for repo in self.repos:
+                self.logger.info("Send request to %s", repo['url'])
+                yield Request(
+                    repo['url'],
+                    cb_kwargs=repo
+                )
 
     def parse(self, response, **kwargs):
-        unit = response.url.split('//')[-1].split('.')[0]
-        if unit == 'maven':
-            return self._parse_maven(response)
-        elif unit == 'tomcat':
-            title = response.xpath('//title/text()').get().find("Tomcat 8")
-            if title > 0:
-                return self._parse_tomcat(8, response)
-            else:
-                return self._parse_tomcat(9, response)
-        elif unit == 'karaf':
-            return self._parse_karaf(response)
-        elif unit == 'felix':
-            return self._parse_felix(response)
-        else:
-            return None
+        return self._parse_repo(response, **kwargs)
