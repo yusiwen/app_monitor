@@ -60,6 +60,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'graalvm/graalvm-ce-builds', 'category': 'develop', 'tags': ['java', 'jdk']},
         {'repo': 'gradle/gradle', 'category': 'develop', 'tags': ['java', 'build']},
         {'repo': 'grafana/grafana', 'category': 'develop', 'tags': ['middleware', 'monitoring']},
+        {'repo': 'grafana/loki', 'category': 'develop', 'tags': ['middleware', 'monitoring', 'log']},
         {'repo': 'harness/drone', 'category': 'tool', 'tags': ['vps', 'ci/cd', 'devops']},
         {'repo': 'hashicorp/consul', 'category': 'develop', 'tags': ['java', 'service discovery',
                                                                      'configuration management', 'microservice']},
