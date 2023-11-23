@@ -4,7 +4,11 @@ LABEL maintainer=yusiwen@gmail.com
 ARG TARGETPLATFORM
 ARG TARGETARCH
 
-COPY . /scrapy
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt update && apt install -y git
+RUN git clone --depth=1 https://github.com/yusiwen/app_monitor.git /scrapy
+
 WORKDIR /scrapy
 RUN pip install -r requirements.txt && \
     python setup.py bdist_egg
