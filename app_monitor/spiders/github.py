@@ -65,6 +65,7 @@ class GithubSpider(scrapy.Spider):
         {'repo': 'hashicorp/consul', 'category': 'develop', 'tags': ['java', 'service discovery',
                                                                      'configuration management', 'microservice']},
         {'repo': 'hashicorp/vagrant', 'category': 'tool', 'tags': ['virtualization']},
+        {'repo': 'hay-kot/homebox', 'category': 'tool', 'tags': ['homelab', 'housekeeping', 'gateway']},
         {'repo': 'HeidiSQL/HeidiSQL', 'category': 'develop', 'tags': ['database']},
         {'repo': 'henrypp/memreduct', 'category': 'tool', 'tags': ['windows', 'memory']},
         {'repo': 'henrypp/simplewall', 'category': 'tool',
