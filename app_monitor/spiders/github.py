@@ -10,7 +10,6 @@ class GithubSpider(scrapy.Spider):
     name = "github"
     allowed_domains = ["api.github.com"]
     template_url = "https://api.github.com/repos/{repo_name}/releases/latest"
-    # @formatter:off
     repos = [
         {"repo": "adobe-fonts/source-han-sans", "category": "font", "tags": ["font"]},
         {
@@ -347,7 +346,6 @@ class GithubSpider(scrapy.Spider):
             "tags": ["reference", "document", "reading"],
         },
     ]
-    # @formatter:on
     http_user = settings.GITHUB_USER
     http_pass = settings.GITHUB_ACCESS_TOKEN
 
