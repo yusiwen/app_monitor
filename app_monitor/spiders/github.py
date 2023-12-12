@@ -93,6 +93,11 @@ class GithubSpider(scrapy.Spider):
             "category": "tool",
             "tags": ["cloud computing", "kubernetes", "cni"],
         },
+        {
+            "repo": "clash-verge-rev/clash-verge-rev",
+            "category": "tool",
+            "tags": ["gfw"],
+        },
         {"repo": "cmderdev/cmder", "category": "tool", "tags": ["terminal"]},
         {
             "repo": "containerd/containerd",
