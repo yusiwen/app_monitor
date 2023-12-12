@@ -3,11 +3,12 @@ LABEL maintainer=yusiwen@gmail.com
 
 ARG TARGETPLATFORM
 ARG TARGETARCH
+ARG BRANCH=master
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt install -y git
-RUN git clone --depth=1 https://github.com/yusiwen/app_monitor.git /scrapy
+RUN git clone --branch=$BRANCH --depth=1 https://github.com/yusiwen/app_monitor.git /scrapy
 
 WORKDIR /scrapy
 RUN pip install -r requirements.txt && \
