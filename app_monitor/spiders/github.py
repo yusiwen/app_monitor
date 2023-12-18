@@ -383,6 +383,8 @@ class GithubSpider(scrapy.Spider):
         item["name"] = app_id
         item["version"] = version
         item["date"] = date
+        item["project_url"] = "https://github.com/" + app_id
+        item["release_url"] = json_dict["html_url"]
         item["notes"] = ""
         item["id"] = app_id
         item["category"] = kwargs["category"]

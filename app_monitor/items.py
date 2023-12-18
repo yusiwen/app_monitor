@@ -13,6 +13,8 @@ class AppMonitorItem(scrapy.Item):
     name = scrapy.Field()
     version = scrapy.Field()
     date = scrapy.Field()
+    project_url = scrapy.Field()
+    release_url = scrapy.Field()
     notes = scrapy.Field()
     download_url = scrapy.Field()
     category = scrapy.Field()
