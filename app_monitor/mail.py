@@ -26,33 +26,37 @@ def _gen_mail(item):
             a.title(item["name"] + " Update Found")
         with a.body():
             with a.p():
-                a(item["name"])
+                if item["project_url"]:
+                    with a.a(href=item["project_url"]):
+                        a(item["name"])
+                else:
+                    a(item["name"])
             with a.p():
                 a(item["category"])
             with a.p():
-                a(item["version"])
+                if item["release_url"]:
+                    with a.a(href=item["release_url"]):
+                        a(item["version"])
+                else:
+                    a(item["version"])
             with a.p():
                 a(item["date"])
             with a.p():
-                if item["project_url"]:
-                    with a.a(href=item["project_url"]):
-                        a(item["project_url"])
-            with a.p():
-                if item["release_url"]:
-                    with a.a(href=item["release_url"]):
-                        a(item["release_url"])
-            with a.p():
                 a(item["notes"])
+            with a.p():
+                a("Download files:")
             urls = item["download_url"]
             if isinstance(urls, str):
                 with a.p():
                     with a.a(href=urls):
                         a(urls)
             elif isinstance(urls, list):
-                for x in urls:
-                    with a.p():
-                        with a.a(href=x):
-                            a(x)
+                with a.p():
+                    with a.ul():
+                        for x in urls:
+                            with a.li():
+                                with a.a(href=x):
+                                    a(x)
 
     msg.attach(MIMEText(text, "plain"))
     msg.attach(MIMEText(str(a), "html"))
