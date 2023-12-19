@@ -34,11 +34,11 @@ def _gen_mail(item):
             with a.p():
                 a(item["date"])
             with a.p():
-                if not item["project_url"]:
+                if item["project_url"]:
                     with a.a(href=item["project_url"]):
                         a(item["project_url"])
             with a.p():
-                if not item["release_url"]:
+                if item["release_url"]:
                     with a.a(href=item["release_url"]):
                         a(item["release_url"])
             with a.p():
