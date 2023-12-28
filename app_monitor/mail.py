@@ -26,7 +26,7 @@ def _gen_mail(item):
             a.title(item["name"] + " Update Found")
         with a.body():
             with a.p():
-                if item["project_url"]:
+                if "project_url" in item and item["project_url"]:
                     with a.a(href=item["project_url"]):
                         a(item["name"])
                 else:
@@ -34,7 +34,7 @@ def _gen_mail(item):
             with a.p():
                 a(item["category"])
             with a.p():
-                if item["release_url"]:
+                if "release_url" in item and item["release_url"]:
                     with a.a(href=item["release_url"]):
                         a(item["version"])
                 else:
@@ -64,21 +64,22 @@ def _gen_mail(item):
 
 
 def send_mail(item):
-    logging.info("Send mail.....")
+    if settings.SEND_MAIL:
+        logging.info("Send mail.....")
 
-    message = _gen_mail(item)
-    message["From"] = "Software Updater <" + settings.SMTP_SENDER + ">"
-    message["To"] = settings.SMTP_RECEIVER
+        message = _gen_mail(item)
+        message["From"] = "Software Updater <" + settings.SMTP_SENDER + ">"
+        message["To"] = settings.SMTP_RECEIVER
 
-    context = ssl.create_default_context()
-    with smtplib.SMTP(settings.SMTP_SERVER, settings.SMTP_PORT) as server:
-        server.ehlo()  # Can be omitted
-        server.starttls(context=context)
-        server.ehlo()  # Can be omitted
-        server.login(settings.SMTP_USERNAME, settings.SMTP_PASSWORD)
-        logging.debug("Mail server logged in")
-        server.sendmail(
-            settings.SMTP_SENDER, settings.SMTP_RECEIVER, message.as_string()
-        )
-        server.quit()
-    logging.info("Mail sent")
+        context = ssl.create_default_context()
+        with smtplib.SMTP(settings.SMTP_SERVER, settings.SMTP_PORT) as server:
+            server.ehlo()  # Can be omitted
+            server.starttls(context=context)
+            server.ehlo()  # Can be omitted
+            server.login(settings.SMTP_USERNAME, settings.SMTP_PASSWORD)
+            logging.debug("Mail server logged in")
+            server.sendmail(
+                settings.SMTP_SENDER, settings.SMTP_RECEIVER, message.as_string()
+            )
+            server.quit()
+        logging.info("Mail sent")
