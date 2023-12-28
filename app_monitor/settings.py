@@ -12,10 +12,10 @@ import os
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'app_monitor'
+BOT_NAME = "app_monitor"
 
-SPIDER_MODULES = ['app_monitor.spiders']
-NEWSPIDER_MODULE = 'app_monitor.spiders'
+SPIDER_MODULES = ["app_monitor.spiders"]
+NEWSPIDER_MODULE = "app_monitor.spiders"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'app_monitor (+http://www.yourdomain.com)'
@@ -23,7 +23,7 @@ NEWSPIDER_MODULE = 'app_monitor.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
-REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
+REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -51,13 +51,13 @@ REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-    'app_monitor.middlewares.AppMonitorSpiderMiddleware': 543,
+    "app_monitor.middlewares.AppMonitorSpiderMiddleware": 543,
 }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'app_monitor.middlewares.AppMonitorDownloaderMiddleware': 300,
+    "app_monitor.middlewares.AppMonitorDownloaderMiddleware": 300,
 }
 
 # Enable or disable extensions
@@ -69,7 +69,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'app_monitor.pipelines.AppMonitorPipeline': 300,
+    "app_monitor.pipelines.AppMonitorPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -93,32 +93,36 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-APP_MONITOR_CONFIG_FILES = ['/etc/scrapy/app_monitor.cfg', '~/.config/scrapy/app_monitor.cfg', '~/.app_monitor.cfg']
+APP_MONITOR_CONFIG_FILES = [
+    "/etc/scrapy/app_monitor.cfg",
+    "~/.config/scrapy/app_monitor.cfg",
+    "~/.app_monitor.cfg",
+]
 
 SEND_MAIL = False
 USE_PROXY = False
-SMTP_SERVER = ''
-SMTP_PORT = ''
-SMTP_USERNAME = ''
-SMTP_PASSWORD = ''
-SMTP_SENDER = ''
-SMTP_RECEIVER = ''
-PROXY_HOST = ''
-PROXY_USERNAME = ''
-PROXY_PASSWORD = ''
+SMTP_SERVER = ""
+SMTP_PORT = ""
+SMTP_USERNAME = ""
+SMTP_PASSWORD = ""
+SMTP_SENDER = ""
+SMTP_RECEIVER = ""
+PROXY_HOST = ""
+PROXY_USERNAME = ""
+PROXY_PASSWORD = ""
 
 ES_ENABLE = False
 ES_HOSTS = []
-ES_USERNAME = ''
-ES_PASSWORD = ''
+ES_USERNAME = ""
+ES_PASSWORD = ""
 ES_USE_SSL = True
 ES_PORT = 443
-ES_CERT = ''
-ES_INDEX = ''
-ES_TYPE = ''
+ES_CERT = ""
+ES_INDEX = ""
+ES_TYPE = ""
 
-GITHUB_USER = ''
-GITHUB_ACCESS_TOKEN = ''
+GITHUB_USER = ""
+GITHUB_ACCESS_TOKEN = ""
 
 
 def load_config(config_file):
@@ -127,54 +131,54 @@ def load_config(config_file):
     config.read(os.path.expanduser(config_file))
 
     global SEND_MAIL
-    SEND_MAIL = config.getboolean('mail', 'enable')
+    SEND_MAIL = config.getboolean("mail", "enable")
     global SMTP_SERVER
-    SMTP_SERVER = config['mail']['smtp_server']
+    SMTP_SERVER = config["mail"]["smtp_server"]
     global SMTP_PORT
-    SMTP_PORT = config['mail']['smtp_port']
+    SMTP_PORT = config["mail"]["smtp_port"]
     global SMTP_USERNAME
-    SMTP_USERNAME = config['mail']['smtp_username']
+    SMTP_USERNAME = config["mail"]["smtp_username"]
     global SMTP_PASSWORD
-    SMTP_PASSWORD = config['mail']['smtp_password']
+    SMTP_PASSWORD = config["mail"]["smtp_password"]
     global SMTP_SENDER
-    SMTP_SENDER = config['mail']['sender']
+    SMTP_SENDER = config["mail"]["sender"]
     global SMTP_RECEIVER
-    SMTP_RECEIVER = config['mail']['receiver']
+    SMTP_RECEIVER = config["mail"]["receiver"]
 
     global USE_PROXY
-    USE_PROXY = config.getboolean('proxy', 'enable')
+    USE_PROXY = config.getboolean("proxy", "enable")
     global PROXY_HOST
-    PROXY_HOST = config['proxy']['url']
+    PROXY_HOST = config["proxy"]["url"]
     global PROXY_USERNAME
-    PROXY_USERNAME = config['proxy']['username']
+    PROXY_USERNAME = config["proxy"]["username"]
     global PROXY_PASSWORD
-    PROXY_PASSWORD = config['proxy']['password']
+    PROXY_PASSWORD = config["proxy"]["password"]
 
     global ES_ENABLE
-    ES_ENABLE = config.getboolean('elasticsearch', 'enable')
+    ES_ENABLE = config.getboolean("elasticsearch", "enable")
     global ES_HOSTS
-    ES_HOSTS = config.get('elasticsearch', 'hosts').split(',')
+    ES_HOSTS = config.get("elasticsearch", "hosts").split(",")
     global ES_PORT
-    ES_PORT = config.getint('elasticsearch', 'port')
+    ES_PORT = config.getint("elasticsearch", "port")
     global ES_USERNAME
-    ES_USERNAME = config['elasticsearch']['username']
+    ES_USERNAME = config["elasticsearch"]["username"]
     global ES_PASSWORD
-    ES_PASSWORD = config['elasticsearch']['password']
+    ES_PASSWORD = config["elasticsearch"]["password"]
     global ES_USE_SSL
-    ES_USE_SSL = config['elasticsearch']['use_ssl']
+    ES_USE_SSL = config["elasticsearch"]["use_ssl"]
     global ES_CERT
-    ES_CERT = config['elasticsearch']['cert']
+    ES_CERT = config["elasticsearch"]["cert"]
     global ES_INDEX
-    ES_INDEX = config['elasticsearch']['index']
+    ES_INDEX = config["elasticsearch"]["index"]
     global ES_TYPE
-    ES_TYPE = config['elasticsearch']['type']
-    if ES_TYPE == '':
-        ES_TYPE = '_doc'
+    ES_TYPE = config["elasticsearch"]["type"]
+    if ES_TYPE == "":
+        ES_TYPE = "_doc"
 
     global GITHUB_USER
-    GITHUB_USER = config['github']['username']
+    GITHUB_USER = config["github"]["username"]
     global GITHUB_ACCESS_TOKEN
-    GITHUB_ACCESS_TOKEN = config['github']['access_token']
+    GITHUB_ACCESS_TOKEN = config["github"]["access_token"]
 
 
 for file in APP_MONITOR_CONFIG_FILES:
