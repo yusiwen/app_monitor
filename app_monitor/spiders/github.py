@@ -125,6 +125,12 @@ class GithubSpider(scrapy.Spider):
         {"repo": "dzikoysk/reposilite", "category": "develop", "tags": ["maven"]},
         {"repo": "Dreamacro/clash", "category": "tool", "tags": ["gfw"]},
         {
+            "repo": "eclipse-openj9/openj9",
+            "category": "develop",
+            "tags": ["java", "jdk"],
+            "external_url": "https://adoptopenjdk.net/releases.html",
+        },
+        {
             "repo": "elastic/elasticsearch",
             "category": "develop",
             "tags": ["middleware"],
@@ -390,11 +396,14 @@ class GithubSpider(scrapy.Spider):
         item["category"] = kwargs["category"]
         item["tags"] = kwargs["tags"]
         assets = json_dict["assets"]
-        if assets is not None:
-            down_urls = []
-            for asset in assets:
-                down_urls.append(asset["browser_download_url"])
-            item["download_url"] = down_urls
+        if "external_url" in kwargs and kwargs["external_url"]:
+            item["download_url"] = kwargs["external_url"]
         else:
-            item["download_url"] = json_dict["html_url"]
+            if assets is not None:
+                down_urls = []
+                for asset in assets:
+                    down_urls.append(asset["browser_download_url"])
+                item["download_url"] = down_urls
+            else:
+                item["download_url"] = json_dict["html_url"]
         return item
