@@ -27,7 +27,7 @@ class AppMonitorPipeline(object):
 
     @staticmethod
     def __get_previous_version_from_es(item):
-        data = es.get(item["id"], item["category"])
+        data = es.get_app_by_docid(item["id"], item["category"])
         if data is not None:
             return data["_source"]["version"]
         else:
