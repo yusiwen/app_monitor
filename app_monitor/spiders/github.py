@@ -336,7 +336,11 @@ class GithubSpider(scrapy.Spider):
         },
         {"repo": "ShareX/ShareX", "category": "tool", "tags": ["screenshot", "ocr"]},
         {"repo": "sharkdp/bat", "category": "tool", "tags": ["cli"]},
-        {"repo": "siderolabs/talos", "category": "tool", "tags": ["cloud computing", "kubernetes"]},
+        {
+            "repo": "siderolabs/talos",
+            "category": "tool",
+            "tags": ["cloud computing", "kubernetes"],
+        },
         {"repo": "sumatrapdfreader/sumatrapdf", "category": "tool", "tags": ["pdf"]},
         {"repo": "tmux/tmux", "category": "tool", "tags": ["terminal"]},
         {"repo": "tonsky/FiraCode", "category": "font", "tags": ["font"]},
