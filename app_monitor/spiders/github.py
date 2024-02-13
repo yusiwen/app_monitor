@@ -130,6 +130,7 @@ class GithubSpider(scrapy.Spider):
             "tags": ["java", "jdk"],
             "external_url": "https://adoptopenjdk.net/releases.html",
         },
+        {"repo": "dustinkirkland/byobu", "category": "tool", "tags": ["terminal"]},
         {
             "repo": "elastic/elasticsearch",
             "category": "develop",
