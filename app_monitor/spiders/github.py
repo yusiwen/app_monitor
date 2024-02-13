@@ -349,6 +349,7 @@ class GithubSpider(scrapy.Spider):
             "category": "develop",
             "tags": ["k8s", "cloud native", "gateway"],
         },
+        {"repo": "vernesong/OpenClash", "category": "tool", "tags": ["gfw"]},
         {"repo": "visualfc/liteide", "category": "develop", "tags": ["go", "ide"]},
         {"repo": "wez/wezterm", "category": "tool", "tags": ["terminal", "desktop"]},
         {
