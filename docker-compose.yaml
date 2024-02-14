@@ -3,7 +3,7 @@ version: "3"
 
 services:
   app_monitor:
-    image: yusiwen/app-monitor:1.0.13
+    image: yusiwen/app-monitor:1.0.14
     container_name: app_monitor
     restart: unless-stopped
     ports:
