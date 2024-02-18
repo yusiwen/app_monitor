@@ -16,12 +16,27 @@ steps:
       DOCKER_REGISTRY_PASSWORD:
         from_secret: docker_registry_password
     commands:
-      - echo "Current directory '$PWD'"
-      - export TAG=$(echo $DRONE_TAG | tr -d 'v')
-      - echo "Building on $TAG..."
-      - docker buildx create --name multi-arch-builder --use --bootstrap
-      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u $DOCKER_REGISTRY_USER --password-stdin
-      - docker buildx build -t yusiwen/app-monitor:$TAG --platform linux/amd64,linux/arm64 --push -f Dockerfile-pipeline .
+      - bash -c ./build.sh
+
+  - name: deploy
+    image: appleboy/drone-ssh
+    pull: if-not-exists
+    environment:
+      VERSION: ${DRONE_TAG}
+      DEPLOYMENT_LOCATION:
+        from_secret: deployment_location
+    settings:
+      host:
+        from_secret: deployment-ssh-host
+      username:
+        from_secret: deployment-ssh-user
+      key:
+        from_secret: deployment-ssh-key
+      envs:
+        - VERSION
+        - DEPLOYMENT_LOCATION
+      script:
+        - cd $DEPLOYMENT_LOCATION && VERSION=$(echo $VERSION | tr -d 'v') docker-compose up -d --wait --wait-timeout=200
 
 trigger:
   event:
