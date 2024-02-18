@@ -36,7 +36,7 @@ steps:
         - VERSION
         - DEPLOYMENT_LOCATION
       script:
-        - cd $DEPLOYMENT_LOCATION && VERSION=$(echo $VERSION | tr -d 'v') docker-compose up -d --wait --wait-timeout=200
+        - cd $DEPLOYMENT_LOCATION && VERSION=$(echo $VERSION | tr -d 'v') docker compose up -d --wait --wait-timeout=200
 
 trigger:
   event:
