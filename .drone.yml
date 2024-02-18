@@ -10,11 +10,17 @@ steps:
     volumes:
       - name: dind-data
         path: /var/run
+    environment:
+      DOCKER_REGISTRY_USER:
+        from_secret: docker_registry_user
+      DOCKER_REGISTRY_PASSWORD:
+        from_secret: docker_registry_password
     commands:
       - echo "Current directory '$PWD'"
       - export TAG=$(echo $DRONE_TAG | tr -d 'v')
       - echo "Building on $TAG..."
       - docker buildx create --name multi-arch-builder --use --bootstrap
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u $DOCKER_REGISTRY_USER --password-stdin
       - docker buildx build --no-cache -t yusiwen/app-monitor:$TAG --platform linux/amd64,linux/arm64 --push -f Dockerfile-pipeline .
 
 trigger:

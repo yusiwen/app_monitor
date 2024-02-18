@@ -4,11 +4,12 @@ LABEL maintainer=yusiwen@gmail.com
 ARG TARGETPLATFORM
 ARG TARGETARCH
 
-ADD . /scrapy
-
+ADD ./requirements.txt /scrapy/requirements.txt
 WORKDIR /scrapy
-RUN pip install -r requirements.txt && \
-    python setup.py bdist_egg
+RUN pip install -r requirements.txt
+
+ADD . .
+RUN python setup.py bdist_egg
 
 FROM --platform=$TARGETPLATFORM python:3.8.18-slim-bullseye
 LABEL maintainer=yusiwen@gmail.com
