@@ -1,0 +1,27 @@
+---
+kind: pipeline
+type: docker # 在 Docker Runner 中运行
+name: default
+
+steps:
+  - name: build-image
+    image: yusiwen/docker-dind:25.0.3
+    pull: if-not-exists
+    volumes:
+      - name: dind-data
+        path: /var/run
+    commands:
+      - export TAG=$(echo $DRONE_TAG | tr -d 'v')
+      - docker buildx build --no-cache -t yusiwen/app-monitor:$TAG --platform linux/amd64,linux/arm64 --push .
+
+trigger:
+  event:
+    - tag
+
+volumes:
+  - name: dind-data
+    host:
+      path: /root/git/myDocker/tools/dind/run
+
+node:
+  node-tag: dev-private
