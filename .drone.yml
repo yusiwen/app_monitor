@@ -12,6 +12,8 @@ steps:
         path: /var/run
     commands:
       - export TAG=$(echo $DRONE_TAG | tr -d 'v')
+      - echo "Building on $TAG..."
+      - docker buildx create --name multi-arch-builder --use --bootstrap
       - docker buildx build --no-cache -t yusiwen/app-monitor:$TAG --platform linux/amd64,linux/arm64 --push .
 
 trigger:
