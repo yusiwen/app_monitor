@@ -11,6 +11,7 @@ steps:
       - name: dind-data
         path: /var/run
     commands:
+      - echo "Current directory '$PWD'"
       - export TAG=$(echo $DRONE_TAG | tr -d 'v')
       - echo "Building on $TAG..."
       - docker buildx create --name multi-arch-builder --use --bootstrap

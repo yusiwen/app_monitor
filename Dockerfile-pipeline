@@ -4,7 +4,7 @@ LABEL maintainer=yusiwen@gmail.com
 ARG TARGETPLATFORM
 ARG TARGETARCH
 
-ADD /drone/src /scrapy
+ADD . /scrapy
 
 WORKDIR /scrapy
 RUN pip install -r requirements.txt && \
