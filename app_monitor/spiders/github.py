@@ -144,6 +144,7 @@ class GithubSpider(scrapy.Spider):
         {"repo": "Fndroid/clash_for_windows_pkg", "category": "tool", "tags": ["gfw"]},
         {"repo": "FredrikNoren/ungit", "category": "develop", "tags": ["git", "vcs"]},
         {"repo": "gchudov/cuetools.net", "category": "tools", "tags": ["media", "cue"]},
+        {"repo": "ggerganov/llama.cpp", "category": "tools", "tags": ["llm", "ai"]},
         {"repo": "git-for-windows/git", "category": "develop", "tags": ["git", "vcs"]},
         {"repo": "gitahead/gitahead", "category": "develop", "tags": ["git", "vcs"]},
         {
@@ -290,7 +291,22 @@ class GithubSpider(scrapy.Spider):
             "category": "tool",
             "tags": ["notetaking", "markdown"],
         },
+        {
+            "repo": "oobabooga/text-generation-webui",
+            "category": "tool",
+            "tags": ["llm", "ai", "web"],
+        },
         {"repo": "ogham/exa", "category": "tool", "tags": ["cli", "file-system"]},
+        {
+            "repo": "ollama/ollama",
+            "category": "tool",
+            "tags": ["llm", "ai"],
+        },
+        {
+            "repo": "open-webui/open-webui",
+            "category": "tool",
+            "tags": ["llm", "ai", "web"],
+        },
         {
             "repo": "PowerShell/Win32-OpenSSH",
             "category": "tool",
@@ -341,6 +357,11 @@ class GithubSpider(scrapy.Spider):
             "repo": "siderolabs/talos",
             "category": "tool",
             "tags": ["cloud computing", "kubernetes"],
+        },
+        {
+            "repo": "SillyTavern/SillyTavern",
+            "category": "tool",
+            "tags": ["llm", "ai", "web"],
         },
         {"repo": "sumatrapdfreader/sumatrapdf", "category": "tool", "tags": ["pdf"]},
         {"repo": "tmux/tmux", "category": "tool", "tags": ["terminal"]},
