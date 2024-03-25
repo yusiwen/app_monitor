@@ -234,6 +234,11 @@ class GithubSpider(scrapy.Spider):
             "tags": ["cli", "search", "filter"],
         },
         {
+            "repo": "k0sproject/k0sctl",
+            "category": "develop",
+            "tags": ["cloud computing", "kubernetes"],
+        },
+        {
             "repo": "keeweb/keeweb",
             "category": "tool",
             "tags": ["security", "password manager"],
