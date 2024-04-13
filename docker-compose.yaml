@@ -5,7 +5,7 @@ services:
     container_name: app_monitor
     restart: unless-stopped
     ports:
-      - 6800:6800
+      - 127.0.0.1:6800:6800
     volumes:
       - ~/.app_monitor.cfg:/etc/scrapy/app_monitor.cfg
 
