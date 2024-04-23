@@ -1,7 +1,7 @@
 ---
 services:
   app_monitor:
-    image: yusiwen/app-monitor:${VERSION:-1.0.14}
+    image: yusiwen/app-monitor:${VERSION:-1.0.16}
     container_name: app_monitor
     restart: unless-stopped
     ports:
