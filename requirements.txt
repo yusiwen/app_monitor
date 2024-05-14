@@ -3,7 +3,7 @@ elasticsearch-dsl==7.4.1
 lxml==4.9.3
 packaging==23.2
 requests==2.31.0
-Scrapy==2.11.0
+Scrapy==2.11.2
 w3lib==2.1.2
 pyyaml~=6.0.1
 setuptools==68.2.2
