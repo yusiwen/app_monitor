@@ -11,7 +11,9 @@ class DockerhubSpider(scrapy.Spider):
     allowed_domains = ["docker.io"]
     repos = [
         "atlassian/confluence-server",
+        "authelia/authelia",
         "bitnami/rabbitmq",
+        "chromadb/chroma",
         "codercom/code-server",
         "dbeaver/cloudbeaver",
         "dreamacro/clash-premium",
@@ -35,6 +37,7 @@ class DockerhubSpider(scrapy.Spider):
         "prom/node-exporter",
         "prom/prometheus",
         "prom/pushgateway",
+        "searxng/searxng",
         "tanghc2020/torna",
     ]
     login_url = "https://auth.docker.io/token"
