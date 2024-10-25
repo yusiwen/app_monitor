@@ -97,6 +97,7 @@ APP_MONITOR_CONFIG_FILES = [
     "/etc/scrapy/app_monitor.cfg",
     "~/.config/scrapy/app_monitor.cfg",
     "~/.app_monitor.cfg",
+    "~\\.app_monitor.cfg"
 ]
 
 SEND_MAIL = False
@@ -180,8 +181,13 @@ def load_config(config_file):
     global GITHUB_ACCESS_TOKEN
     GITHUB_ACCESS_TOKEN = config["github"]["access_token"]
 
-
+loaded = False
 for file in APP_MONITOR_CONFIG_FILES:
     if os.path.isfile(os.path.expanduser(file)):
         load_config(file)
+        loaded = True
         break
+
+if not loaded:
+    print("Configuration file not found!")
+    exit(1)
