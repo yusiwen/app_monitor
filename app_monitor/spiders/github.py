@@ -70,6 +70,7 @@ class GithubSpider(scrapy.Spider):
             "category": "develop",
             "tags": ["database"],
         },
+        {"repo": "authelia/authelia", "category": "tool", "tags": ["security", "authentication"]},
         {"repo": "be5invis/Iosevka", "category": "font", "tags": ["font"]},
         {"repo": "be5invis/Sarasa-Gothic", "category": "font", "tags": ["font"]},
         {
