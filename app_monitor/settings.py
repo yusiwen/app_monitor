@@ -125,6 +125,9 @@ ES_TYPE = ""
 GITHUB_USER = ""
 GITHUB_ACCESS_TOKEN = ""
 
+PUSH_URL = ""
+PUSH_TOKEN = ""
+
 
 def load_config(config_file):
     print("Loading configuration from: ", config_file)
@@ -180,6 +183,11 @@ def load_config(config_file):
     GITHUB_USER = config["github"]["username"]
     global GITHUB_ACCESS_TOKEN
     GITHUB_ACCESS_TOKEN = config["github"]["access_token"]
+
+    global PUSH_URL
+    PUSH_URL = config["push"]["url"]
+    global PUSH_TOKEN
+    PUSH_TOKEN = config["push"]["token"]
 
 loaded = False
 for file in APP_MONITOR_CONFIG_FILES:

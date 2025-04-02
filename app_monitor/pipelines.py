@@ -8,6 +8,7 @@ import re
 from app_monitor import es
 from app_monitor import mail
 from app_monitor import settings
+from app_monitor import notification
 
 
 # Define your item pipelines here
@@ -72,6 +73,7 @@ class AppMonitorPipeline(object):
             if previous_ver != item["version"]:
                 AppMonitorPipeline.__save_version(item, update=True)
                 mail.send_mail(item)
+                notification.send_notification(item)
             else:
                 pattern = re.compile("true|1", re.IGNORECASE)
                 if spider_settings.get("force_save") and pattern.mmatchatch(
@@ -93,6 +95,7 @@ class AppMonitorPipeline(object):
         else:  # if no previous version has been found, then this check is running the first time
             AppMonitorPipeline.__save_version(item)
             mail.send_mail(item)
+            notification.send_notification(item)
 
     @staticmethod
     def process_item(item, spider):
