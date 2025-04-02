@@ -53,7 +53,7 @@ trigger:
 volumes:
   - name: dind-data
     host:
-      path: /root/git/myDocker/tools/docker/dind/run
+      path: /data/dind/run
 
 node:
   node-tag: dev-private
