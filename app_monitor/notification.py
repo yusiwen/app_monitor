@@ -13,9 +13,9 @@ def send_notification(item):
         resp = requests.post(
             f"{settings.PUSH_URL}/message?token={settings.PUSH_TOKEN}",
             json={
-                "message": f"Latest version: {item.version}",
+                "message": f"Latest version: {item["version"]}",
                 "priority": 2,
-                "title": f"[{str(item['category']).upper()}] {item['name']} Update Found"
+                "title": f"[{str(item["category"]).upper()}] {item["name"]} Update Found"
             },
             timeout=10  # 设置超时时间，避免无限等待
         )
