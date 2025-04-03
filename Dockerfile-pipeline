@@ -1,14 +1,14 @@
 FROM python:3.8.18-slim-bullseye AS builder
 LABEL maintainer=yusiwen@gmail.com
 
-ADD ./requirements.txt /scrapy/requirements.txt
-WORKDIR /scrapy
-RUN pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/ && \
-    pip config set install.trusted-host mirrors.aliyun.com && \
-    pip install -r requirements.txt
-
+WORKDIR /build
 ADD . .
-RUN python setup.py bdist_egg
+RUN --mount=type=cache,target=/build/deps,sharing=locked \
+    pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/ && \
+    pip config set install.trusted-host mirrors.aliyun.com && \
+    export PYTHONPATH=/build/python-deps:$PYTHONPATH && \
+    pip install -r requirements.txt --target /build/python-deps && \
+    python setup.py bdist_egg
 
 FROM python:3.8.18-slim-bullseye
 LABEL maintainer=yusiwen@gmail.com
@@ -18,12 +18,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN sed -i "s/deb\.debian\.org/mirrors\.aliyun\.com/g" /etc/apt/sources.list && \
     apt update && apt install -y tini && rm -rf /var/lib/apt/lists/*
 
-COPY ./requirements.txt /requirements.txt
-RUN pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/ && \
-    pip config set install.trusted-host mirrors.aliyun.com && \
-    pip install -r /requirements.txt
+COPY --from=builder /build/python-deps/ /var/lib/python-deps/
+COPY --from=builder /build/dist/app_monitor-1.0-py3.8.egg /scrapyd/eggs/app_monitor/app_monitor.egg
 COPY ./scrapyd.conf /etc/scrapyd/scrapyd.conf
-COPY --from=builder /scrapy/dist/app_monitor-1.0-py3.8.egg /scrapyd/eggs/app_monitor/app_monitor.egg
+
+ENV PYTHONPATH="/var/lib/python-deps:$PYTHONPATH"
+ENV PATH="/var/lib/python-deps/bin:$PATH"
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["scrapyd"]
