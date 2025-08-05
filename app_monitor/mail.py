@@ -41,8 +41,10 @@ def _gen_mail(item):
                     a(item["version"])
             with a.p():
                 a(item["date"])
+            a.hr()
             with a.p():
                 a(item["notes"])
+            a.hr()
             with a.p():
                 a("Download files:")
             urls = item["download_url"]
