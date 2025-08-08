@@ -4,6 +4,7 @@ import ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+import mistune
 from airium import Airium
 
 from app_monitor import settings
@@ -43,7 +44,7 @@ def _gen_mail(item):
                 a(item["date"])
             a.hr()
             with a.p():
-                a(item["notes"])
+                a(mistune.html(item["notes"]))
             a.hr()
             with a.p():
                 a("Download files:")
