@@ -18,14 +18,15 @@ FROM python:3.8.18-slim-bullseye
 LABEL maintainer=yusiwen@gmail.com
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt install -y tini && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/bin/tini /usr/bin/tini
-COPY --from=builder /scrapy/.venv /scrapy/.venv
+COPY --from=builder /scrapy/.venv/ /scrapy/.venv/
 COPY --from=builder /scrapy/scrapyd.conf /etc/scrapyd/scrapyd.conf
-COPY --from=builder /scrapy/dist/app_monitor-1.0-py3.8.egg /scrapyd/eggs/app_monitor/app_monitor.egg
+COPY --from=builder /scrapy/dist/app_monitor-1.0-py3.8.egg /scrapy/eggs/app_monitor/app_monitor.egg
+
+WORKDIR /scrapy
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["bash", "-c", "source /scrapy/.venv/bin/activate && scrapyd"]
+CMD ["bash", "-c", "source .venv/bin/activate && scrapyd"]
 
 EXPOSE 6800
