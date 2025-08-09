@@ -17,8 +17,6 @@ RUN python -m venv .venv && \
 FROM python:3.8.18-slim-bullseye
 LABEL maintainer=yusiwen@gmail.com
 
-ENV DEBIAN_FRONTEND=noninteractive
-
 COPY --from=builder /usr/bin/tini /usr/bin/tini
 COPY --from=builder /scrapy/.venv/ /scrapy/.venv/
 COPY --from=builder /scrapy/scrapyd.conf /etc/scrapyd/scrapyd.conf

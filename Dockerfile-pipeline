@@ -1,23 +1,25 @@
 FROM python:3.8.18-slim-bullseye AS builder
-LABEL maintainer=yusiwen@gmail.com
 
 WORKDIR /build
 ADD . .
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN sed -i "s/deb\.debian\.org/mirrors\.aliyun\.com/g" /etc/apt/sources.list && \
+    apt-get update && apt-get install tini \
+
 RUN --mount=type=cache,target=/build/deps,sharing=locked \
     pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/ && \
     pip config set install.trusted-host mirrors.aliyun.com && \
     export PYTHONPATH=/build/python-deps:$PYTHONPATH && \
     pip install -r requirements.txt --target /build/python-deps && \
+    pip install --target /build/python-deps scrapyd==1.4.3 scrapyd-client==1.2.3 && \
     python setup.py bdist_egg
 
 FROM python:3.8.18-slim-bullseye
 LABEL maintainer=yusiwen@gmail.com
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN sed -i "s/deb\.debian\.org/mirrors\.aliyun\.com/g" /etc/apt/sources.list && \
-    apt update && apt install -y tini && rm -rf /var/lib/apt/lists/*
-
+COPY --from=builder /usr/bin/tini /usr/bin/tini
 COPY --from=builder /build/python-deps/ /var/lib/python-deps/
 COPY --from=builder /build/dist/app_monitor-1.0-py3.8.egg /scrapyd/eggs/app_monitor/app_monitor.egg
 COPY ./scrapyd.conf /etc/scrapyd/scrapyd.conf
